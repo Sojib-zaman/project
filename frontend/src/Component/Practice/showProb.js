@@ -19,7 +19,11 @@ const Problem = ({problem}) => {
                         </div>
                         <br></br>
                         <div className='difficulty'>
-                        <h6>Problem Rank : {problem.RANK}</h6>
+                        <h6>Problem Rank : {problem.RANK } </h6>
+                        </div>
+                        <div className='info'>
+                        <h6>Submission : {problem.SUBMISSION_COUNT } </h6>
+                        <h6>Accepted : {problem.ACCEPTANCE_COUNT } </h6>
                         </div>
                     </div>
                 </div>

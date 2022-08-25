@@ -1,10 +1,16 @@
-
+import AddAns from '../showanswers/addans';
 import ShowAnswer from '../showanswers/show_ans';
+import { Link} from 'react-router-dom';
+import { useState } from 'react';
 import './qlist.css'
-const Questionlist = ({ Questionlist, title}) => {
-    console.log(typeof(Questionlist))
+const Questionlist = ({ Questionlist, title, Admin}) =>
+{
+  const [name, setName] = useState("");
+
+ 
+    console.log(Admin)
     let nblog = Object.entries(Questionlist);
-    console.log(nblog[1])
+    
   
       return (
         <div className="blog-list">
@@ -15,7 +21,9 @@ const Questionlist = ({ Questionlist, title}) => {
           <div className="blog-preview"  >
            
               <h1>{ Question.QUES_CONTENT }</h1>
-              <h3>Asked by {Question.NAME}</h3>
+              <h3>Asked by 
+              <Link to={'user/'+Question.ID_1 } >
+                {Question.NAME}</Link></h3>
               <h4>TIME : {Question.TIME}</h4>
               <h4>Category : {Question.CATEGORY}</h4>
               
@@ -23,7 +31,12 @@ const Questionlist = ({ Questionlist, title}) => {
               {
             <ShowAnswer Ques_id = {Question.ID}></ShowAnswer>
            } 
-  
+           {
+            <AddAns Ques_id = {Question.ID}></AddAns>
+           }
+
+
+             
               
   
   

@@ -8,9 +8,11 @@ import Footer from '../Footer/Footer';
 import './submit.css'
 
 
+
 const Submit =()=>
 {
     const ID = useParams() ; 
+    const[probID , setID] = useState('') ;
     const [prob , setProb] = useState({}) ; 
     const [string, setString ] = useState('');
     const[incorrect , setinc] = useState('') ; 
@@ -20,28 +22,29 @@ const Submit =()=>
     const [im , setimage] = useState({}) 
     const parse = require('html-react-parser')
 
-useEffect(()=>
-{
-    const getques= async()=>
+    useEffect(()=>
     {
-        
-        console.log(ID.id)
-        const res = await fetch ('http://localhost:3000/practiceques/problem/'+ID.id);
-        const data = await res.json() ; 
-        console.log("in data")
-        console.log(data.rows) ;
-        console.log(data.rows[0]) 
-        setProb(data.rows[0]) ; 
-        setSol(data.rows[0].Discussion)
-        setString(data.rows[0].DESCRIPTION) ; 
-        setimage(data.rows[0].IMG) ;
-        console.log(string) ; 
-    }
-
-    try{getques();}
-    catch(error){console.log(error)} 
-
-},[])
+        const getques= async()=>
+        {
+            
+            console.log(ID.id)
+            const res = await fetch ('http://localhost:3000/practiceques/problem/'+ID.id);
+            const data = await res.json() ; 
+            console.log("in data")
+            console.log(data.rows) ;
+            console.log(data.rows[0]) ;
+            setID(ID.id)
+            setProb(data.rows[0]) ; 
+            setSol(data.rows[0].Discussion)
+            setString(data.rows[0].DESCRIPTION) ; 
+            setimage(data.rows[0].IMG) ;
+            console.log(string) ; 
+        }
+    
+        try{getques();}
+        catch(error){console.log(error)} 
+    
+    },[])
 const handlechange = async(event) =>
 {
     console.log(event.target.name, event.target.value)
@@ -51,12 +54,92 @@ const handlechange = async(event) =>
         setans(event.target.value);
     }
 }
-const submission_done = (e)=>
+const submission_done = (event)=>
 {
+
+    event.preventDefault() ; 
+
+    console.log("in sub")
+
+
+    const x = {...probID} ; 
+    x['ID'] = probID ; 
+    setProb(x) ;  
+
+
+
+  
+    console.log(probID)
+ const fetchData = async (ID) => {
+          
+   //console.log(ID)
+
+    const res = await fetch('http://localhost:3000/proc/subcount',{
+      method : 'POST' , 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },body: JSON.stringify(x)
+    });
+    const data = await res.json();
+    
+    
+    //console.log(data);    
+  }
+
+
+   //console.log(probID)
+  
+  
+   fetchData(probID)
+  .catch(console.error);
+
+
+
+
+
+
+
+
+
+
+
     if(ans == prob.SOLUTION)
-        setinc("Correct Answer")
+       { 
+        alert("Correct Answer") ; 
+
+        const fetchData = async (ID) => {
+          
+           // console.log(ID)
+         
+             const res = await fetch('http://localhost:3000/proc/account',{
+               method : 'POST' , 
+               headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'
+             },body: JSON.stringify(x)
+             });
+             const data = await res.json();
+             
+             
+             //console.log(data);    
+           }
+         
+         
+            console.log(probID)
+           
+           
+            fetchData(probID)
+           .catch(console.error);
+        
+
+       }
     else 
-        setinc("The answer does not match. Please Try Again")
+        alert("The answer does not match. Please Try Again")
+    
+    
+    
+   
 }
 return(
     <div>
@@ -76,7 +159,7 @@ return(
                 </div>
                 <div >
                     <input type="text" name='answer' placeholder='Enter Your Answer' onChange={handlechange} />
-                    <small style={{color:'red'}}>{incorrect}</small>
+                   
                     <input type="submit" value="Submit" onClick={submission_done}/>
                 </div>
             </div>

@@ -6,6 +6,10 @@ import './login2.css';
 const LogIn2 = ({state}) => {
     
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    
+
+
+
     const [aboutPassword,setAboutPassword]=useState('')
     const [passConfirmation,setPassConfirmation]=useState('')
     const [wrongUser,setWrongUser] = useState('')
@@ -65,16 +69,55 @@ const LogIn2 = ({state}) => {
             })
             
             const data = await res.json()  
+            console.log("data in 68 login2")
             console.log(data)
-            if(data.length === 0){
-                setWrongUser('Wrong Email or password')
+            if(data.length === 0)
+            
+            
+            
+            
+            {
+                //checking if he is a deleted user
+                try {
+                    console.log("in try in login2 checking for deleted user") ; 
+                    const res = await fetch('http://localhost:3000/member/isdeleted', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                         
+                    })
+               
+                const data2 = await res.json()  
+                console.log("data in 68 login2")
+                console.log(data2);
+                if(data2.rows.length!=0){setWrongUser('Your Account was previously deleted')}
+                else {setWrongUser('Wrong Email or password') ; }
+
+
+
+ }
+                catch (error) {
+                    console.log(error);
+                }
+
+
+
+
+
+
+                
             }
             else{
                 setLoggedInUser(data[0]);
                 console.log(data);
                 window.localStorage.setItem("token",JSON.stringify(data[0]))
-                
-                //console.log(state) ; 
+                if(data[0].Admin == 1)
+                    console.log("He is admin")
+                else  console.log("He is not an admin")
+                             
                 
                 navigate(location?.state?.from || '/home', {replace:true})
             }
@@ -108,7 +151,7 @@ const LogIn2 = ({state}) => {
                         
                     </form>
                     <p className="link">
-                  <a href="#">Forgot password ?</a> Or <a href="/signup">Sign Up</a>
+                  Don't Have an Account ? <a href="/signup">Sign Up</a>
                 </p>
                 </div>
            </div>

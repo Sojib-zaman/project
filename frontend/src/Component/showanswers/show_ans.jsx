@@ -45,7 +45,7 @@ const ShowAnswer = ({Ques_id})=>
                 
                 }
                 else{
-                    console.log(data[0]) ; 
+                    //console.log(data[0]) ; 
                     setAnswer(data);
                     //console.log(data);
                     

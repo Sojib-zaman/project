@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import  { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
+import Header2 from '../header2';
 import Questionlist from './queslist';
 //import NavBar from '../NavBar/NavBar';
 import './showq.css'
@@ -10,6 +11,7 @@ import './showq.css'
 const Showq = ()=> 
 {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [ADMIN,setadmin] = useState(null);
     const [ques,setques] = useState(null);
     let navigate = useNavigate() ; 
     let location  = useLocation() ; 
@@ -18,7 +20,10 @@ const Showq = ()=>
 
     useEffect(()=>
     {
-        
+        if(loggedInUser.ADMIN==1)
+    {
+        setadmin(true);
+    }
         let url = 'http://localhost:3000/showpost/showquestions' ;
         
             try
@@ -61,6 +66,7 @@ const Showq = ()=>
     },[])
 return (
     <div>
+        <Header2></Header2>
         <div className="profile-container">
             <div className="profile-left">
             </div>
@@ -72,7 +78,7 @@ return (
                     
                 
                
-                    { ques && < Questionlist Questionlist={ques} title="All Questions asked by users"/>
+                    { ques && < Questionlist Questionlist={ques} title="All Questions asked by users" Admin={ADMIN}/>
                     } 
                     
                     

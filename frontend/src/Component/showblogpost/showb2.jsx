@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import  { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
+import Footer from '../Footer/Footer';
+import Header2 from '../header2';
 import BlogList from './bloglist';
 //import NavBar from '../NavBar/NavBar';
 import './showb.css'
@@ -50,15 +52,17 @@ const Showb = ()=>
                 
     },[])
 return (
+    
     <div>
-        <div className="profile-container">
+        <div className="profile-container" id="container">
+            <Header2/>
             <div className="profile-left">
             </div>
             <div className="profile-right">
                 <div className="profile-right-header">
                     <h1>BLOG POSTS</h1>
                 </div>
-                <div className="profile-info">
+                <div className="profile-info" id='profile'>
                     
                 
                 
@@ -76,7 +80,7 @@ return (
             <div>
             </div>
         </div>
-    
+
     </div>
         );
     };
