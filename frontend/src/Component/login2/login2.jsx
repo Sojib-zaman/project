@@ -65,9 +65,46 @@ const LogIn2 = ({state}) => {
             })
             
             const data = await res.json()  
+            console.log("data in 68 login2")
             console.log(data)
-            if(data.length === 0){
-                setWrongUser('Wrong Email or password')
+            if(data.length === 0)
+            
+            
+            
+            
+            {
+                //checking if he is a deleted user
+                try {
+                    console.log("in try in login2 checking for deleted user") ; 
+                    const res = await fetch('http://localhost:3000/member/isdeleted', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(user)
+                         
+                    })
+               
+                const data2 = await res.json()  
+                console.log("data in 68 login2")
+                console.log(data2);
+                if(data2.rows.length!=0){setWrongUser('Your Account was previously deleted')}
+                else {setWrongUser('Wrong Email or password') ; }
+
+
+
+ }
+                catch (error) {
+                    console.log(error);
+                }
+
+
+
+
+
+
+                
             }
             else{
                 setLoggedInUser(data[0]);
@@ -75,7 +112,7 @@ const LogIn2 = ({state}) => {
                 window.localStorage.setItem("token",JSON.stringify(data[0]))
                 if(data[0].Admin == 1)
                     console.log('Welcome Admin')
-                //console.log(state) ; 
+                             
                 
                 navigate(location?.state?.from || '/home', {replace:true})
             }

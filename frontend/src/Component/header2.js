@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link , Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../App';
 const Header2 = (props) => {
   const logout = ()=>
     {
@@ -7,6 +9,7 @@ const Header2 = (props) => {
         Navigate('/' , {replace:true}) ; 
         window.location.reload() ;
     }
+    const [loggedInUser,setLoggedInUser] = useContext(UserContext);
   return (
     <Container>
       <Content>
@@ -63,7 +66,7 @@ const Header2 = (props) => {
             <User>
               <a>
                 <a href="\profile">
-                <img src="/images/user.svg" alt="" />
+                <img src={loggedInUser.IMAGE} alt="" />
                 <span>Me</span></a>
                 <img src="/images/down-icon.svg" alt="" />
               </a>

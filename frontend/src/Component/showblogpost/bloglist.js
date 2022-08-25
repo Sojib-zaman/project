@@ -3,8 +3,8 @@ import AddComment from "../showcomment/addcomment";
 import Upvote from "./upvotes";
 import Savedpost from "./savedpost";
 import { useState } from "react";
-
-
+import { Link} from 'react-router-dom';
+import './showb.css';
 const BlogList = ({ blogs, title}) => {
 
 let nblog = Object.entries(blogs);
@@ -17,7 +17,7 @@ const demo = (event)=>
   //console.log(event.target.name , event.target.value) ;
  
   setBLOGID(event.target.name) ; 
-  console.log(BLOG_ID)
+  //console.log(BLOG_ID)
   
   
   const fetchData = async (BLOG_ID) => {
@@ -37,20 +37,30 @@ const demo = (event)=>
 
 
     return (
-      <div className="blog-list">
+      <div className="bloglist" id="bloglist">
         <center><h2>{ title }</h2></center>
         {
         
         nblog[1][1].map(blog => (
-        <div className="blog-preview"  >
          
-            <center><h1>{ blog.BLOG_TITLE }</h1>
-            <h3>Written by {blog.NAME}</h3>
+          <div className="blog-preview" id='blogpreview' >
+
+            <div>
+         { console.log(blog) }
+         <center id='title'><h1>{ blog.BLOG_TITLE }</h1>
+            <h3>Written by
+              <Link to={'user/'+blog.ID_1 } >
+                 {blog.NAME}
+              </Link>
+              
+              </h3>
             <h4>TIME : {blog.TIME}</h4>
             <h4>Category : {blog.CATEGORY}</h4>
             <h5>upvotes : {blog.UPVOTES}</h5>
             </center>
+            </div>
 
+            <br></br><br></br><br></br><br></br>
             <p>{ blog.BLOG_CONTENT }</p>
          
           {
@@ -58,7 +68,7 @@ const demo = (event)=>
           }
 
           {
-            <Savedpost></Savedpost>
+            <Savedpost BLOG_ID={blog.ID}></Savedpost>
           }
 
            {
