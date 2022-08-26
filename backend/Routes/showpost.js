@@ -179,4 +179,24 @@ router.post('/saveblog' , async(req , res) =>
 )
 
 
+router.post('/showfollowingposts', async(req,res)=>{
+  try{
+    console.log("line 85 in routes show personal posts ")
+    console.log(req.body) ; 
+    const  { userID } = req.body ; 
+    const result = await query.follwingposts(userID) ; 
+   console.log("RESULT in routes line 189 for fblog") 
+    console.log(result)
+    
+    res.json(result);
+    
+   
+  
+  }
+  catch(err){
+    console.log(err)
+  }  
+})
+
+
 module.exports = router
