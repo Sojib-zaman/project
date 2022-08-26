@@ -1,6 +1,52 @@
 import styled from "styled-components";
+import React, { useEffect } from 'react';
+import  { useContext, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
+import BlogList from "./showblogpost/bloglist";
+import BlogsMain from "./showblogpost/blogsmain";
 
 const Main = (props) => {
+
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [blogs,setPosts] = useState(null);
+  let navigate = useNavigate() ; 
+  let location  = useLocation() ; 
+
+  useEffect(()=>
+  {
+      
+      let url = 'http://localhost:3000/showpost/showblogs' ;
+      
+          try
+          {
+              fetch(url) 
+       .then(res => 
+          {
+              return res.json()
+          }
+          ) 
+          .then(
+              (data)=>
+              {
+                  setPosts(data)
+                  //console.log(data)
+              }
+
+              
+          ).catch(err => 
+          {
+              console.log(err.message) ; 
+          })
+      
+          }
+          catch
+          {
+              console.log("eroro")
+          }
+              
+  },[])
+
   return <Container>
     <ShareBox>
       Share
@@ -45,42 +91,18 @@ const Main = (props) => {
       
     </div>
     </ShareBox>
+    
+    <Blogs>
+    <span>Recent</span>
     <div>
-      <Article><SharedActor>
-        <a>
-          <img src="/images/user.svg" all=""/>
-          <div>
-            <span>Title</span>
-            <span>Info</span>
-            <span>Date</span>
-          </div>
-        </a>
-        <button>
-          <img src="/images/plus-icon.svg" alt=""/>
-
-        </button>
-      </SharedActor>
-      <Description>How many stars are there in the sky?</Description>
-     <SharedImg>
-       <a>
-      <img src="images/template-img.jpg" alt=""/>
-      </a>
-      </SharedImg>
-      <SocialCounts>
-        <li>
-          <button>
-            <img src="images/like.svg" alt=""/>
-            <img src= "images/clap.svg" alt=""/>
-            <span>75</span>
-          </button>
-        </li>
-        <li>
-         <a> 2 comments </a>
-        </li>
-      </SocialCounts>
-      </Article>
-
+      <br/>
+      
+    { blogs && < BlogsMain blogs={blogs} />
+                    } 
+                    
     </div>
+    </Blogs>
+
 
 
 
@@ -108,6 +130,7 @@ flex-direction: column;
 color:  #958b7b;
 margin: 0 0 8px;
 background: white;
+
 
 div{
   button {
@@ -298,5 +321,20 @@ const SocialCounts= styled.ul`
       }
     }
 `;
+
+const Blogs = styled(CommonCard)`
+display: flex;
+flex-direction: column;
+color:  #958b7b;
+margin: 0 0 8px;
+background: white;
+
+div{
+  color: #000;
+}
+
+
+
+`
 
 export default Main;

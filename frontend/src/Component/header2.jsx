@@ -93,18 +93,25 @@ const Header2 = (props) => {
 
 
               <SignOut>
-              <Link to = '/' onClick={logout}><button className='topNavBtn'>log out</button></Link>
+              <Link to = '/' onClick={logout}><button className='topNavBtn'>log out</button>
+              </Link>
               </SignOut>
             </User>
 
             <Work>
               <a>
+              
                 <img src="/images/nav-work.svg" width="5px" alt="" />
                 <span>
                     Notifications
                   <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
+              <Notification> <a href='/notifications'>
+              <button className='topNavBtn'>Show Notifications</button>
+              </a>
+              
+              </Notification>
             </Work>
           </NavListWrap>
         </Nav>
@@ -254,7 +261,7 @@ const SignOut = styled.div`
   display: none;
   button{
     width: 50px;
-    font-size: 12px;
+    font-size: 11px;
     background: transparent;
     color: #000;
   }
@@ -284,9 +291,36 @@ const User = styled(NavList)`
   }
 `;
 
+const Notification = styled.div`
+position: absolute;
+top: 45px;
+background: white;
+border-radius: 0 0 5px 5px;
+width: 100px;
+height: 40px;
+font-size: 16px;
+transition-duration: 167ms;
+text-align: center;
+display: none;
+button{
+  width: 80px;
+  font-size: 11px;
+  text-align: center;
+  background: transparent;
+  color: #000;
+}
+`;
+
 const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
-  
+
+  &:hover {
+    ${Notification} {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
 `;
 
 export default Header2;

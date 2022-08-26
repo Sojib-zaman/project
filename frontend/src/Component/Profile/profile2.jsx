@@ -61,7 +61,7 @@ const Profile2 = () => {
 
 
                         <h6 class="f-w-600"  id='name'>{loggedInUser.NAME}</h6>
-                        <p>Student</p>
+                        <p id='student'>Student</p>
                         <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                     </div>
                 </div>

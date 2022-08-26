@@ -13,8 +13,16 @@ background-color: rgb(249, 249, 250);
 border-radius: 5px;
 border: none;
 
+}
 
+#title{
+  background: transparent;
+  color:#2e91f5;
 
+}
+#title2{
+  background-color: cadetblue;
+  color: aliceblue;
 }
 #left{
   border: 0;

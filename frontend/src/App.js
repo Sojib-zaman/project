@@ -16,7 +16,6 @@ import AskQues2 from './Component/askques/askques2';
 import Login from './Component/login';
 import LogIn2 from './Component/login2/login2';
 import Signup from './Component/register2/signup';
-import Profile from './Component/Profile/Profile';
 import AskQues from './Component/askques/askques';
 //import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 //import Signup from './Component/register2/signup';
@@ -33,6 +32,7 @@ import Submit from './Component/Submit/submit';
 import Update from './Component/Profile/Update';
 import Otheruser from './Component/Profile/otheruser';
 import ShowAdminOptions from './Component/AdminControl/AdminControl';
+import Notification from './Component/Notifications/notification';
 
 
 
@@ -69,9 +69,10 @@ function App() {
           <Route path='/questions' element={<AskQues2/>}/>
           <Route path='/showblogs' element={<Showb/>}/>
           <Route path='/showquestions' element={<Showq/>}/>
+          <Route path='/notifications' element={<Notification/>}/>
           <Route path='/personalposts' element={<Showpersonalblog DEF = {0}/>}></Route>
           <Route path='/personalquestions' element={<ShowPersonalQues DEF = {0}></ShowPersonalQues>}></Route>
-          <Route path='/AdminControl' element={<ShowAdminOptions/>}/>
+          <Route path='/admincontrol' element={<ShowAdminOptions/>}/>
 
 
           <Route path='/practice' element ={<PracticeSet></PracticeSet>}></Route>
