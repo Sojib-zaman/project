@@ -9,42 +9,55 @@ import BlogsMain from "./showblogpost/blogsmain";
 const Main = (props) => {
 
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-  const [blogs,setPosts] = useState(null);
+  const [homeblogs,sethblog] = useState(null);
   let navigate = useNavigate() ; 
   let location  = useLocation() ; 
-
-  useEffect(()=>
+  const[userinfo , setuserinfo] = useState({}) ; 
+  let a =0;
+  a=loggedInUser.ID ; 
+  useEffect( ()=>
   {
+      const need = async()=>
+      {
+          console.log("try strart")
+          try {
       
-      let url = 'http://localhost:3000/showpost/showblogs' ;
-      
-          try
-          {
-              fetch(url) 
-       .then(res => 
-          {
-              return res.json()
-          }
-          ) 
-          .then(
-              (data)=>
-              {
-                  setPosts(data)
-                  //console.log(data)
+                 userinfo['userID'] = a ; 
+              const res = await fetch('http://localhost:3000/showpost/showfollowingposts',  {
+                  method: 'POST',
+                
+                  
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(userinfo)
+                   
+              } )
+              
+              const data = await res.json()  
+              console.log("here data")
+              console.log(data)
+              if(data.length === 0){
+              
               }
-
-              
-          ).catch(err => 
-          {
-              console.log(err.message) ; 
-          })
+              else{
+                  //console.log(data[0]) ; 
+                  sethblog(data)
+                  //console.log(data);
+                  
+                  
+                  
+              }
       
+          } catch (error) {
+              console.log(error);
           }
-          catch
-          {
-              console.log("eroro")
-          }
-              
+      }
+
+      need() ;
+      
+      
   },[])
 
   return <Container>
@@ -93,16 +106,17 @@ const Main = (props) => {
     </ShareBox>
     
     <Blogs>
-    <span>Recent</span>
+    <span></span>
     <div>
       <br/>
       
-    { blogs && < BlogsMain blogs={blogs} />
+    { homeblogs && < BlogsMain blogs={homeblogs} />
                     } 
                     
     </div>
-    </Blogs>
 
+    </Blogs>
+          
 
 
 

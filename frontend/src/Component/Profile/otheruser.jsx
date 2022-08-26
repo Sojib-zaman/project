@@ -86,6 +86,9 @@ const followuser=(event)=>
         
          fetchData()
         .catch(console.error);
+
+
+        window.location.reload(false);
      
 
 

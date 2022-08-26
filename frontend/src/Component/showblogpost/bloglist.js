@@ -50,7 +50,7 @@ const demo = (event)=>
          <center id='title2'>{ blog.BLOG_TITLE }</center>
          <center id='otherInfo'>
             <h3>Author : 
-              <Link to={'  user/'+blog.ID_1 } >
+              <Link to={'user/'+blog.ID_1 } >
                   { blog.NAME}
               </Link>
               

@@ -6,7 +6,8 @@ import { Link} from 'react-router-dom';
 import './showb.css';
 const BlogsMain = ({ blogs, title}) => {
 
-let nblog = Object.entries(blogs);
+
+
 const [BLOG_ID , setBLOGID] = useState([]) ; 
 const demo = (event)=>
 {
@@ -40,7 +41,7 @@ const demo = (event)=>
         <center><h2>{ title }</h2></center>
         {
         
-        nblog[1][1].map(blog => (
+        blogs.map(blog => (
          
           <div className="blog-preview" id='blogpreview' >
 
@@ -56,21 +57,20 @@ const demo = (event)=>
 
               <div style={{color:"black"}}>
                 <h5>TIME : {blog.TIME}</h5>
-                <h5>Category : {blog.CATEGORY}</h5>
-                <h5>upvotes : {blog.UPVOTES}</h5>
+               
             </div>
             </div>
 
             <br></br><br></br><br></br><br></br>
             <p>{ blog.BLOG_CONTENT }</p>
          
-          {
+          {/* {
             <Upvote BLOG_ID={blog.ID}></Upvote>
           }
 
           {
             <Savedpost BLOG_ID={blog.ID}></Savedpost>
-          }
+          } */}
 
           
 
