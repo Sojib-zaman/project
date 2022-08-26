@@ -56,39 +56,39 @@ const Profile2 = () => {
                     <div class="card-block text-center text-white">
                         
                         <div >
-                        <img className='profile-picture' src={loggedInUser.IMAGE}  width="500" height="500"></img>
+                        <img className='profile-picture' id='profilepicture'  src={loggedInUser.IMAGE}  width="500" height="500"></img>
                         </div>
 
 
-                        <h6 class="f-w-600">{loggedInUser.NAME}</h6>
-                        <p>Student</p>
+                        <h6 class="f-w-600"  id='name'>{loggedInUser.NAME}</h6>
+                        <p id='student'>Student</p>
                         <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                     </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="card-block">
-                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600"  id='info'>Information</h6>
                         <div class="row">
                             <div class="col-sm-6">
                                 <p class="m-b-10 f-w-600">Email</p>
-                                <h6 class="text-muted f-w-400">{loggedInUser.EMAIL}</h6>
+                                <h6 class="text-muted f-w-400"  id='mail'>{loggedInUser.EMAIL}</h6>
                             </div>
                             <br/>
                             <div class="col-sm-6">
                                 <p class="m-b-10 f-w-600">Country</p>
                                 
-                                <h6 class="text-muted f-w-400">{loggedInUser.COUNTRY}</h6>
+                                <h6 class="text-muted f-w-400" id='country'>{loggedInUser.COUNTRY}</h6>
                             </div>
                         </div>
                     <div>
                     
                     <a href='/updateinfo'>
-                    <input type="submit" value="Update my information " width="50px" className='createpostBtn' />
+                    <input type="submit" value="Update my information " width="50px"  id='buttonUpdate' />
                     </a>
                    
 
                     
-                    <input id ="danger" type="submit" value="Delete my account" width="50px" className='createpostBtn' onClick={Deleteacc}/>
+                    <input id='buttonDelete' type="submit" value="Delete my account" width="50px"  onClick={Deleteacc}/>
                     
                     </div>
 
@@ -108,7 +108,7 @@ const Profile2 = () => {
     <div>
                     
     <a href="/personalquestions">
-    <input type="submit" value="Show My asked questions" width="50px" className='createpostBtn' />
+    <input type="submit" value="Show My asked questions" width="50px" className='showmything' />
     </a>
 </div>
                                 <h6 class="text-muted f-w-400"></h6>
@@ -118,12 +118,12 @@ const Profile2 = () => {
                                 <p class="m-b-10 f-w-600">Posts</p>
                                 <div>
     <a href="/personalposts">
-    <input type="submit" value="Show My Posted Blogs" width="50px" className='createpostBtn' />
+    <input type="submit" value="Show My Posted Blogs" width="50px" className='showmything'  />
     </a>
 
 
     <a href="/savedposts">
-    <input type="submit" value="Show My Saved Blogs" width="50px" className='createpostBtn' />
+    <input type="submit" value="Show My Saved Blogs" width="50px" className='showmything'  />
     </a>
 
 

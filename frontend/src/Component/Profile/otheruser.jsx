@@ -14,22 +14,25 @@ const Otheruser = () => {
 const ID = useParams() ; 
 console.log(ID) ; 
  const [loggedInUser,setLoggedInUser] = useContext(UserContext);
+  
 
+const[notify , setnoti] = useState('') ; 
 const[visitee , setvisitee ] = useState('')
 const[otherq , setoq] = useState('');
 const[otherb , setob] = useState('')
 useEffect(()=>
 {
+    
     const getuser= async()=>
     {
         
-        console.log(ID.id)
+        //console.log(ID.id)
         const res = await fetch ('http://localhost:3000/member/user/'+ID.id);
         const data = await res.json() ; 
-        console.log("in data")
-       // console.log(data[0]) ;
+        //console.log("in data")
+       
         setvisitee(data[0])
-        //console.log(visitee)
+       
         
        
     }
@@ -48,6 +51,44 @@ const userblogs=async()=>
 {
    setob(true);
     
+}
+const followuser=(event)=>
+{
+    event.preventDefault() ; 
+
+    const x = {...notify} ; 
+    x['FOLLOWEE_ID'] = visitee.ID ; 
+    x['FOLLOWER_ID'] = loggedInUser.ID ; 
+    setnoti(x) ;  
+
+
+
+    const fetchData = async () => {
+          
+        
+      
+          const res = await fetch('http://localhost:3000/proc/notifyfollow',{
+            method : 'POST' , 
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },body: JSON.stringify(x)
+          });
+          const data = await res.json();
+          
+          
+          //console.log(data);    
+        }
+      
+      
+         console.log(x)
+        
+        
+         fetchData()
+        .catch(console.error);
+     
+
+
 }
 
  let navigate  = useNavigate();
@@ -106,7 +147,9 @@ const userblogs=async()=>
      
      
      
-    <div>               
+    <div>    
+
+    <input type="submit" value="Follow" width="50px" className='createpostBtn' onClick={followuser} />           
    
     <input type="submit" value="Show User's asked questions" width="50px" className='createpostBtn' onClick={userques} />
         {

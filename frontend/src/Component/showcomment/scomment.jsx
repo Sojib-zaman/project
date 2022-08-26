@@ -65,25 +65,19 @@ const ShowComments = ({blog_name})=>
     } , [])
 return (
     <div>
-        <div className="profile-container">
-            <div className="profile-left">
-            </div>
-            <div className="profile-right">
-                <div className="profile-right-header">
-                    <h1>comments</h1>
-                </div>
-                <div className="profile-info">
-                    
+        <div className="comment-container">
+            
+            
+                <div className="comment-header">
+                    <h1 style={{backgroundColor: "aquamarine", height: "20px",padding: "5px"}}>COMMENTS</h1> 
+               
                 
                 
-                    { comments && < Commentlist comment={comments} title="All comments"/>
+                    { comments && < Commentlist comment={comments} title=""/>
                     } 
                     
                     
-                    <div>
-                        
-                    </div>
-                </div>
+                 
             </div>
             <div>
             </div>

@@ -1,8 +1,8 @@
 import './App.css';
 //import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './Component/Home/Home'
 
-import Home from './Component/Home/Home'
+
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,7 +22,7 @@ import AskQues from './Component/askques/askques';
 //import Signup from './Component/register2/signup';
 import Showpersonalblog from './Component/showblogpost/personal';
 import {createContext, useState} from 'react';
-import Nav from './Component/Home/TopComp/Nav/Nav';
+
 import Blog from './Component/BlogPost/blog';
 import Showb from './Component/showblogpost/showb2';
 import Showq from './Component/showallques/showq';
@@ -32,6 +32,10 @@ import ShowSaved from './Component/showblogpost/showsaved';
 import Submit from './Component/Submit/submit';
 import Update from './Component/Profile/Update';
 import Otheruser from './Component/Profile/otheruser';
+import ShowAdminOptions from './Component/AdminControl/AdminControl';
+import Notification from './Component/Notifications/notification';
+
+
 export const UserContext=createContext();
 
 function App() {
@@ -60,14 +64,14 @@ function App() {
           <Route path='/' element={<Login/>}/>
           <Route path='/login' element={<LogIn2/>}/>
           <Route path='/profile' element={<Profile2/>}/>
-          <Route path='/nav' element={<Nav/>}/>
+          <Route path='/notifications' element={<Notification/>}/>
           <Route path='/blogs' element={<Blog/>}/>
           <Route path='/questions' element={<AskQues2/>}/>
           <Route path='/showblogs' element={<Showb/>}/>
           <Route path='/showquestions' element={<Showq/>}/>
           <Route path='/personalposts' element={<Showpersonalblog DEF = {0}/>}></Route>
           <Route path='/personalquestions' element={<ShowPersonalQues DEF = {0}></ShowPersonalQues>}></Route>
-          
+          <Route path='/AdminControl' element={<ShowAdminOptions/>}/>
 
 
           <Route path='/practice' element ={<PracticeSet></PracticeSet>}></Route>

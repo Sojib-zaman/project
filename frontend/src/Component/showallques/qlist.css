@@ -1,4 +1,12 @@
 
+#headtitleq
+{
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:  linear-gradient( #67b26f,
+    #4ca2cd );
+    margin-top: 28px;
+}
 .blog-preview {
     padding: 10px 16px;
     margin: 20px 0;

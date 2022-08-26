@@ -1,6 +1,12 @@
 import styled from "styled-components";
-
+import React from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../App';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Leftside = (props) => {
+  const [loggedInUser,setLoggedInUser] = useContext(UserContext);
+  let navigate  = useNavigate();
+  let location = useLocation();
   return (
     <Container>
       <ArtCard>
@@ -23,11 +29,14 @@ const Leftside = (props) => {
             <img src="/images/widget-icon.svg" alt="" />
           </a>
         </Widget>
-        <Item>
-          <span>
+        <Item><a href='/savedposts'>
+          <span> 
             <img src="/images/item-icon.svg" alt="" />
-            My Saved Items
-          </span>
+             My Saved Items
+
+
+          </span></a>
+
         </Item>
       </ArtCard>
 
@@ -54,6 +63,8 @@ const Leftside = (props) => {
 
 const Container = styled.div`
   grid-area: leftside;
+  position: fixed;
+  width:275px;
 `;
 
 const ArtCard = styled.div`
@@ -154,6 +165,9 @@ const Item = styled.a`
   padding: 12px;
   font-size: 12px;
   display: block;
+  a {
+    text-decoration: none;
+  }
   span {
     display: flex;
     align-items: center;

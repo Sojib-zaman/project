@@ -1,9 +1,65 @@
 body {
     background-color: #f9f9fa
 }
+
+#page-content{
+    padding-top: 40px;
+}
 .danger
 {
     background-color: red;
+}
+
+#profilepicture{
+   
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    align-content: center;
+    margin-left: 556px;
+    height: 350px;
+    width: 350px; align-self: center;
+
+    
+
+
+
+
+}
+@keyframes example {
+    from {color:#0d0941}
+    to {color: red;}
+  }
+#name{
+    text-align: center;
+    font-size: xx-large;
+    color: #0d0941;
+    text-align: center;
+    font-family:'Raleway';
+    animation-name: example;
+  animation-duration: 4s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+#student{
+    text-align: center;
+}
+
+#info{
+    font-size: x-large;
+}
+
+#mail{
+    font-size: medium;
+    color:#0d0941;
+}
+
+#country{
+    font-size: medium;
+    color:#2d24ac;
+    text-transform: capitalize;
 }
 
 
@@ -78,7 +134,7 @@ p {
 }
 
 .b-b-default {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #b13737;
 }
 
 .m-b-20 {
@@ -98,7 +154,7 @@ p {
 }
 
 .text-muted {
-    color: #919aa3 !important;
+    color: #2b7bca !important;
 }
 
 .b-b-default {
@@ -151,4 +207,36 @@ p {
 .show_blog
 {
     background-color: #6d63f2;
+}
+#buttonUpdate{
+    background-color:rgb(77, 211, 29);
+    color: rgb(215, 21, 21);
+    font-weight: bolder;
+    padding: 5px;
+    border-radius: 25px;
+    width: 40%;
+    margin: 15px;
+    height: 45px;
+}
+#buttonDelete{
+    background-color:rgb(255, 17, 0);
+    color: rgb(21, 215, 102);
+    font-weight: bolder;
+    padding: 5px;
+    border-radius: 25px;
+    width: 40%;
+    margin: 15px;
+    height: 45px;
+}
+.showmything
+{
+    background-color: rgb(227, 220, 25);
+    color: #b13737;
+    font-weight: bolder;
+    padding: 5px;
+    border-radius: 5px;
+    width: 40%;
+    margin: 15px;
+    height: 45px;
+
 }

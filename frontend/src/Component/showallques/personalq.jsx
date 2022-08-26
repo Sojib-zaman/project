@@ -5,6 +5,7 @@ import { UserContext } from '../../App';
 import PersonalQuesList from './personalques';
 //import NavBar from '../NavBar/NavBar';
 import './personal.css'
+import Header2 from '../header2';
 
 
 const ShowPersonalQues = ({DEF})=> 
@@ -72,6 +73,7 @@ const ShowPersonalQues = ({DEF})=>
     },[])
 return (
     <div>
+        <Header2></Header2>
         <div className="profile-container">
             <div className="profile-left">
             </div>

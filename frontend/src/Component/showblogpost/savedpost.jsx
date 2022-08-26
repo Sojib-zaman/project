@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import  { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
+import Header2 from '../header2';
 
 //import NavBar from '../NavBar/NavBar';
 
@@ -52,12 +53,10 @@ const Savedpost = ({BLOG_ID})=>
    
 return (
     <div>
-        <div>
-            <p>
-            <input type="submit" value="Save post" className='createpostBtn'  onClick={demo}/>
-            { }
-            </p>
-           </div>
+      <Header2></Header2>
+      
+            <input style={{width:"82%"}} type="submit" value="Save post" className='createpostBtns'  onClick={demo}/>
+      
     
     </div>
         );

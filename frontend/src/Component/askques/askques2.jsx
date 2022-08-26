@@ -125,7 +125,7 @@ const AskQues2 = () => {
     </Container>
     <div>
   <a href="/showquestions">
-<input type="submit" value="Show All Questions" width="50px" className='createpostBtn' />
+<input style={{width:"82%" , marginTop:"-200px" , paddingLeft:"30px"}} type="submit" value="Show All Questions" width="50px" className='creater' />
 </a>
 </div>
     <Footer></Footer>

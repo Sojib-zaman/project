@@ -1,11 +1,10 @@
-import ShowComments from "../showcomment/scomment";
-import AddComment from "../showcomment/addcomment";
+
 import Upvote from "./upvotes";
 import Savedpost from "./savedpost";
 import { useState } from "react";
 import { Link} from 'react-router-dom';
-import './showbloglist.css';
-const BlogList = ({ blogs, title}) => {
+import './showb.css';
+const BlogsMain = ({ blogs, title}) => {
 
 let nblog = Object.entries(blogs);
 const [BLOG_ID , setBLOGID] = useState([]) ; 
@@ -37,50 +36,43 @@ const demo = (event)=>
 
 
     return (
-      <div id="bloglist_2">
-        <center id = "headtitle">{ "WELCOME TO PROJECT FORNAX BLOG SECTION" }</center>
+      <div className="bloglist" id="bloglist">
+        <center><h2>{ title }</h2></center>
         {
         
         nblog[1][1].map(blog => (
          
-          <div id='bloglist-preview' >
+          <div className="blog-preview" id='blogpreview' >
 
-            <div id ='info2'>
-         
-         <center id='title2'>{ blog.BLOG_TITLE }</center>
-         <center id='otherInfo'>
-            <h3>Author : 
-              <Link to={'  user/'+blog.ID_1 } >
-                  { blog.NAME}
-              </Link>
+            <div>
+         { console.log(blog) }
+         <h1 id='title69'>{ blog.BLOG_TITLE }</h1>
+            <h3 id='title24'>
+              
+                 {blog.NAME}
+              
               
               </h3>
-            <h4>TIME : {blog.TIME}</h4>
-            <h4>Category : {blog.CATEGORY}</h4>
-            <h5>upvotes : {blog.UPVOTES}</h5>
-            </center>
+
+              <div style={{color:"black"}}>
+                <h5>TIME : {blog.TIME}</h5>
+                <h5>Category : {blog.CATEGORY}</h5>
+                <h5>upvotes : {blog.UPVOTES}</h5>
+            </div>
             </div>
 
-            
-            <div id="content">{ blog.BLOG_CONTENT }</div>
-         <div id="additionalbutton">
+            <br></br><br></br><br></br><br></br>
+            <p>{ blog.BLOG_CONTENT }</p>
+         
           {
             <Upvote BLOG_ID={blog.ID}></Upvote>
-            
           }
 
           {
             <Savedpost BLOG_ID={blog.ID}></Savedpost>
           }
-</div>
-           {
-           <AddComment blog_id={blog.ID}></AddComment>
-           }
-           
-           
-           {
-            <ShowComments blog_name = {blog.ID}></ShowComments>
-           } 
+
+          
 
        
             
@@ -94,4 +86,4 @@ const demo = (event)=>
     );
   }
    
-  export default BlogList;
+  export default BlogsMain;
