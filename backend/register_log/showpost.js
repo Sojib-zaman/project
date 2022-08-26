@@ -131,6 +131,78 @@ handle.upvoteblog = async(BLOG_ID) =>
     const result = (await con.execute(query , binds , con.options))
     return result ; 
 }
+
+
+
+handle.subcount = async(ID) => 
+{
+    
+    //console.log("in register log subcount ") 
+    //console.log(ID)
+    const query = `
+    BEGIN
+     INC_SUB(:ID) ; 
+    END;
+    
+    `
+    
+    const binds={ID}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+handle.AcCount = async(ID) => 
+{
+    
+    //console.log("in register log AC count ") 
+    //console.log(ID)
+    const query = `
+    BEGIN
+     INC_ACPT(:ID) ; 
+    END;
+    
+    `
+    
+    const binds={ID}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+
+handle.SendFollowNotification = async(FOLLOWEE_ID , FOLLOWER_ID) => 
+{
+    
+    //console.log("in register log AC count ") 
+    //console.log(ID)
+    const query = `
+    BEGIN
+     SEND_NOTIFICATION(:FOLLOWEE_ID , :FOLLOWER_ID) ; 
+    END;
+    
+    `
+    
+    const binds={FOLLOWEE_ID , FOLLOWER_ID}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+
+handle.SendUpvoteNotification = async(BLOG_ID, USER_ID) => 
+{
+   
+   
+    const query = `
+    BEGIN
+     UP_NOTI(:BLOG_ID, :USER_ID);
+    END;
+    
+    `
+    
+    const binds={BLOG_ID, USER_ID}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+
+
+
+
 handle.saveblog = async(USER_ID , BLOG_ID) => 
 {
     
