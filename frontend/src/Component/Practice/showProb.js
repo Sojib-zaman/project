@@ -11,15 +11,15 @@ const Problem = ({problem}) => {
                 <div className='prob-container'>
 
                     <div className='prob-title'>
-                        <h1>Problem Title : {problem.TITLE}</h1>
+                        <h1 style={{color:"red"}}> {problem.TITLE}</h1>
                     </div>
                     <div className='prob-tag'>
                         <div className='tag'>
-                            <h6>Type of the Problem : {problem.CATEGORY}</h6>
+                            <h6>Type : {problem.CATEGORY}</h6>
                         </div>
-                        <br></br>
+                        
                         <div className='difficulty'>
-                        <h6>Problem Rank : {problem.RANK } </h6>
+                        <h6> Rank : {problem.RANK } </h6>
                         </div>
                         <div className='info'>
                         <h6>Submission : {problem.SUBMISSION_COUNT } </h6>

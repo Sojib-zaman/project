@@ -89,31 +89,29 @@ const AddAns = ({Ques_id}) => {
         <div>
             
             
-            <div className='addPost-container'>
-                
-                <div className='addPost-form'>
-                    
-
-                    <div className='form'>
+            <div id='addAns-container'>
+                <br></br>
+                <h3 style={{margin:"20px"}}>Add an Answer</h3>
+                <div className='addc-form'>
                         
-                        <form action="" className='addPost-form'>
+                <form action="" className='addC-fm'>
+    
                             
                             
                            
                             <textarea name="ANS_CONTENT" id="area" cols="100" rows="5" placeholder='Add answer' onChange={handleChange} required></textarea>
                             <br></br><br></br>
                             <input type="submit" value="Submit" className='createpostBtn' onClick={handleSubmit} />
-                        </form>
-                    </div>
-                </div>
-                <div>
-                    <div></div>
-                    
-                  
-                </div>
-            </div>
-           
-        </div>
+                            </form>
+                 
+                 </div>
+                 <div>
+                     <div></div>
+                     
+                   
+                 </div>
+             </div>
+         </div>
 
     );
 };

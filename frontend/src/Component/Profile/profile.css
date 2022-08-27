@@ -11,21 +11,58 @@ body {
 }
 
 #profilepicture{
-    align-self: center;
+   
     align-items: center;
     border-radius: 50%;
     display: flex;
     align-content: center;
-    margin-left: 480px;
+    margin-left: 556px;
     height: 350px;
-    width: 350px;
+    width: 350px; align-self: center;
+
+    
+
+
+
 
 }
-
+#askq
+{
+    background-color: rgb(227, 220, 25);
+color: #b13737;
+font-weight: bolder;
+padding: 5px;
+border-radius: 5px;
+width: 40%;
+margin: 15px;
+height: 45px;
+}
+#follow
+{
+    background-color: rgb(77, 211, 29);
+color: rgb(215, 21, 21);
+font-weight: bolder;
+padding: 5px;
+border-radius: 25px;
+width: 40%;
+margin: 15px;
+height: 45px;
+}
+@keyframes example {
+    from {color:#0d0941}
+    to {color: red;}
+  }
 #name{
     text-align: center;
     font-size: xx-large;
     color: #0d0941;
+    text-align: center;
+    font-family:'Raleway';
+    animation-name: example;
+  animation-duration: 4s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
 }
 
 #student{
@@ -192,4 +229,36 @@ p {
 .show_blog
 {
     background-color: #6d63f2;
+}
+#buttonUpdate{
+    background-color:rgb(77, 211, 29);
+    color: rgb(215, 21, 21);
+    font-weight: bolder;
+    padding: 5px;
+    border-radius: 25px;
+    width: 40%;
+    margin: 15px;
+    height: 45px;
+}
+#buttonDelete{
+    background-color:rgb(255, 17, 0);
+    color: rgb(21, 215, 102);
+    font-weight: bolder;
+    padding: 5px;
+    border-radius: 25px;
+    width: 40%;
+    margin: 15px;
+    height: 45px;
+}
+.showmything
+{
+    background-color: rgb(227, 220, 25);
+    color: #b13737;
+    font-weight: bolder;
+    padding: 5px;
+    border-radius: 5px;
+    width: 40%;
+    margin: 15px;
+    height: 45px;
+
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../../App';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import Header2 from '../header2';
 import Footer from '../Footer/Footer';
@@ -11,6 +11,7 @@ import './submit.css'
 
 const Submit =()=>
 {
+    const [loggedInUser,setLoggedInUser] = useContext(UserContext);
     const ID = useParams() ; 
     const[probID , setID] = useState('') ;
     const [prob , setProb] = useState({}) ; 
@@ -30,15 +31,15 @@ const Submit =()=>
             console.log(ID.id)
             const res = await fetch ('http://localhost:3000/practiceques/problem/'+ID.id);
             const data = await res.json() ; 
-            console.log("in data")
-            console.log(data.rows) ;
-            console.log(data.rows[0]) ;
+            //console.log("in data")
+            //console.log(data.rows) ;
+            //console.log(data.rows[0]) ;
             setID(ID.id)
             setProb(data.rows[0]) ; 
             setSol(data.rows[0].Discussion)
             setString(data.rows[0].DESCRIPTION) ; 
             setimage(data.rows[0].IMG) ;
-            console.log(string) ; 
+            //console.log(string) ; 
         }
     
         try{getques();}
@@ -99,13 +100,15 @@ const submission_done = (event)=>
 
 
 
-
+  let verdict = 0 
 
 
 
 
     if(ans == prob.SOLUTION)
        { 
+        verdict = 1;
+        x['STATUS']='Accepted'
         alert("Correct Answer") ; 
 
         const fetchData = async (ID) => {
@@ -135,9 +138,40 @@ const submission_done = (event)=>
 
        }
     else 
-        alert("The answer does not match. Please Try Again")
+       {
+        verdict = 0 ;
+        x['STATUS'] = 'Wrong Answer'
+        alert("The answer does not match. Please Try Again") ; 
+
+           
+       } 
     
-    
+       const addingsubmissiondata = async (ID) => 
+       {
+       
+        x['USER_ID'] = loggedInUser.ID ; 
+        x['TIME'] = Date().toLocaleString() ; 
+        //console.log(ID)
+     
+         const res = await fetch('http://localhost:3000/member/addingtosubmissiontable',{
+           method : 'POST' , 
+           headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json'
+         },body: JSON.stringify(x)
+         });
+         const data = await res.json();
+         
+         
+         //console.log(data);    
+       }
+     
+     
+        //console.log(probID)
+       
+       
+        addingsubmissiondata(probID)
+       .catch(console.error);
     
    
 }
@@ -160,15 +194,17 @@ return(
                 <div >
                     <input type="text" name='answer' placeholder='Enter Your Answer' onChange={handlechange} />
                    
-                    <input type="submit" value="Submit" onClick={submission_done}/>
+                    <input style={{border:"3px solid black",color: "red" , backgroundColor:"lime", marginTop:"50px" , marginBottom:"30px"}} type="submit" value="Submit" onClick={submission_done}/>
                 </div>
             </div>
 
 
 
-            <div>
-                <button style={{color: "red" , backgroundColor:"lime"}}onClick={()=>{setshow(true)}}>show solution</button>
-            </div>
+            <div style={{display : "inline-flex"}}>
+                <button style={{border:"3px solid black",color: "red" , backgroundColor:"white" , marginLeft:"500px" , marginBottom:"30px"}}onClick={()=>{setshow(true)}}>Show Solution</button>
+             <Link to={'/submissions/'+probID} className='status-link' >Problem Status</Link>
+       </div>
+
             { console.log(sol) }
             {show_solve && 
             <div>
@@ -177,6 +213,11 @@ return(
 
             </div>
                     } 
+
+
+           
+                   
+     
 
             <Footer></Footer>
 

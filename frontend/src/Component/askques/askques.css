@@ -58,9 +58,18 @@ label{
     margin: 15px;
     height: 45px;
 }
+.creater
+{
+   
+        background: linear-gradient( #f3904f, #3b4371 );
+        margin-bottom: 30px;
+        margin-left: 11pc;
+}
 #CATEGORY
 {
     display: block;
-    background-color: white;
-    color: black;
+background-color: wheat;
+color: black;
+font-size: large;
+font-weight: bold;
 }

@@ -61,7 +61,7 @@ const Profile2 = () => {
 
 
                         <h6 class="f-w-600"  id='name'>{loggedInUser.NAME}</h6>
-                        <p>Student</p>
+                        <p id='student'>Student</p>
                         <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                     </div>
                 </div>
@@ -83,12 +83,12 @@ const Profile2 = () => {
                     <div>
                     
                     <a href='/updateinfo'>
-                    <input type="submit" value="Update my information " width="50px" className='createpostBtn' id='button' />
+                    <input type="submit" value="Update my information " width="50px"  id='buttonUpdate' />
                     </a>
                    
 
                     
-                    <input id='button' type="submit" value="Delete my account" width="50px" className='createpostBtn' onClick={Deleteacc}/>
+                    <input id='buttonDelete' type="submit" value="Delete my account" width="50px"  onClick={Deleteacc}/>
                     
                     </div>
 
@@ -108,7 +108,7 @@ const Profile2 = () => {
     <div>
                     
     <a href="/personalquestions">
-    <input type="submit" value="Show My asked questions" width="50px" className='createpostBtn' />
+    <input type="submit" value="Show My asked questions" width="50px" className='showmything' />
     </a>
 </div>
                                 <h6 class="text-muted f-w-400"></h6>
@@ -118,12 +118,12 @@ const Profile2 = () => {
                                 <p class="m-b-10 f-w-600">Posts</p>
                                 <div>
     <a href="/personalposts">
-    <input type="submit" value="Show My Posted Blogs" width="50px" className='createpostBtn' />
+    <input type="submit" value="Show My Posted Blogs" width="50px" className='showmything'  />
     </a>
 
 
     <a href="/savedposts">
-    <input type="submit" value="Show My Saved Blogs" width="50px" className='createpostBtn' />
+    <input type="submit" value="Show My Saved Blogs" width="50px" className='showmything'  />
     </a>
 
 

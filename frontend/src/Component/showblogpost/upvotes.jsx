@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import  { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
-
+import './upvotes.css'
 //import NavBar from '../NavBar/NavBar';
 
 
@@ -61,13 +61,7 @@ const Upvote = ({BLOG_ID})=>
    
 return (
     <div>
-        <div>
-            <p>
-            <input type="submit" value="upvote" className='createpostBtn' onClick={demo} />
-            { }
-            </p>
-           </div>
-    
+   <input style={{width:"82%"}} type="submit" value="upvote" className='createpostBtnr' onClick={demo} />
     </div>
         );
     };

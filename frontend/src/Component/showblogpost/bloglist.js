@@ -4,7 +4,7 @@ import Upvote from "./upvotes";
 import Savedpost from "./savedpost";
 import { useState } from "react";
 import { Link} from 'react-router-dom';
-import './showb.css';
+import './showbloglist.css';
 const BlogList = ({ blogs, title}) => {
 
 let nblog = Object.entries(blogs);
@@ -37,20 +37,21 @@ const demo = (event)=>
 
 
     return (
-      <div className="bloglist" id="bloglist">
-        <center><h2>{ title }</h2></center>
+      <div id="bloglist_2">
+        <center id = "headtitle">{ "WELCOME TO PROJECT FORNAX BLOG SECTION" }</center>
         {
         
         nblog[1][1].map(blog => (
          
-          <div className="blog-preview" id='blogpreview' >
+          <div id='bloglist-preview' >
 
-            <div>
-         { console.log(blog) }
-         <center id='title'><h1>{ blog.BLOG_TITLE }</h1>
-            <h3>Written by
+            <div id ='info2'>
+         
+         <center id='title2'>{ blog.BLOG_TITLE }</center>
+         <center id='otherInfo'>
+            <h3>Author : 
               <Link to={'user/'+blog.ID_1 } >
-                 {blog.NAME}
+                  { blog.NAME}
               </Link>
               
               </h3>
@@ -60,17 +61,18 @@ const demo = (event)=>
             </center>
             </div>
 
-            <br></br><br></br><br></br><br></br>
-            <p>{ blog.BLOG_CONTENT }</p>
-         
+            
+            <div id="content">{ blog.BLOG_CONTENT }</div>
+         <div id="additionalbutton">
           {
             <Upvote BLOG_ID={blog.ID}></Upvote>
+            
           }
 
           {
             <Savedpost BLOG_ID={blog.ID}></Savedpost>
           }
-
+</div>
            {
            <AddComment blog_id={blog.ID}></AddComment>
            }

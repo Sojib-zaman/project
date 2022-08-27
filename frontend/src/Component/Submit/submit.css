@@ -10,3 +10,22 @@
     border: 1px solid black;
     padding: 10px;
 }
+.status-link
+{
+    text-decoration: none;
+    border: 3px solid cadetblue;
+    border-radius: 16px;
+    background-color: antiquewhite;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 43px;
+    width: 247px;
+    margin: 19px;
+    text-align: center;
+    font-size: 28px;
+  
+}
