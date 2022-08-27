@@ -39,10 +39,10 @@ router.get('/problem/:ID' , async(req , res )=>
     try 
     {
         const ID =  await req.params.ID ; 
-        console.log("ID:")
-        console.log(ID) ; 
+        //console.log("ID:")
+        //console.log(ID) ; 
         const result = await query.getSpecificQues(ID) ;
-        console.log(result) 
+        //console.log(result) 
         res.json(result) ; 
     }
     catch(error)

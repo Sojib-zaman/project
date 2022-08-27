@@ -181,6 +181,17 @@ handle.SendFollowNotification = async(FOLLOWEE_ID , FOLLOWER_ID) =>
     
     const binds={FOLLOWEE_ID , FOLLOWER_ID}
     const result = (await con.execute(query , binds , con.options))
+
+    const query2= `
+   INSERT INTO FOLLOWS(FOLLOWING , FOLLOWER) VALUES(:FOLLOWEE_ID,:FOLLOWER_ID)
+    
+    `
+    
+    const binds2={FOLLOWEE_ID , FOLLOWER_ID}
+    const result2 = (await con.execute(query2 , binds2 , con.options))
+
+
+
     return result ; 
 }
 
@@ -219,6 +230,48 @@ handle.saveblog = async(USER_ID , BLOG_ID) =>
 }
 
 
+handle.follwingposts = async(userID ) => 
+{
+    
+    
+   // console.log("in register log showpost show pblogs ") 
+   // console.log(userID) ;
+    //"HERE USER ID IS THE ONE WHO IS FOLLOWING"
+    //correct query later 
+    const query = `
+    SELECT DISTINCT P.ID , P.BLOG_TITLE , P.BLOG_CONTENT , to_char(P.TIME ,'YYYY-MM-DD HH24:MI:SS') AS TIME 
+    FROM APP_USER U JOIN BLOG P ON P.USER_ID = U.ID
+    WHERE P.USER_ID IN 
+        (
+            SELECT FOLLOWING 
+            FROM FOLLOWS 
+            WHERE FOLLOWER = :userID
+        )
+    ORDER BY TIME DESC`
+    const binds={userID : userID}
+    const result = (await con.execute(query , binds , con.options))
+    //console.log('78 result in main query register')
+    //console.log(result.rows) ; 
+    return result.rows ; 
+}
+
+
+handle.getspecificprobinfo= async(ID ) => 
+{
+    
+    
+   // console.log("in register log showpost show pblogs ") 
+   // console.log(userID) ;
+
+    //correct query later 
+    const query = `
+   select S.PROBLEM_ID , S.STATUS ,P.TITLE, S.TIME , U.NAME from submission S JOIN APP_USER U on S.USER_ID = U.ID JOIN PRACTICE P ON S.PROBLEM_ID = P.ID where S.PROBLEM_ID = :ID`
+    const binds={ID}
+    const result = (await con.execute(query , binds , con.options))
+    //console.log('78 result in main query register')
+    //console.log(result.rows) ; 
+    return result.rows ; 
+}
 
 
 module.exports = handle ;

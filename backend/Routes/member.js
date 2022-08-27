@@ -7,7 +7,7 @@ router.post('/signup' , async(req , res) =>
     {
         console.log("in member signup") ; 
        
-        const {NAME , PASSWORD , COUNTRY , EMAIL , IMAGE } = req.body ; 
+        const {NAME , PASSWORD , COUNTRY , EMAIL , IMAGE} = req.body ; 
          console.log(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE)
         const result = await query.create( NAME , PASSWORD , COUNTRY , EMAIL , IMAGE ) 
        
@@ -48,6 +48,26 @@ router.post('/delete' , async(req , res) =>
         const { ID , EMAIL} = req.body ; 
         console.log( ID)
         const result = await query.delete(  ID, EMAIL) 
+       
+        res.end() ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+
+
+router.post('/deletequestion' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member delete Question") ; 
+       
+        const {ID} = req.body ; 
+        console.log( ID)
+        const result = await query.deleteQuestion( ID) 
        
         res.end() ; 
     }
@@ -120,5 +140,80 @@ router.post('/isdeleted' , async(req , res)=>
 }
 )
 
+router.post('/getnotifications' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member getting notifications") ; 
+       
+        const {USER_ID} = req.body ; 
+         console.log(USER_ID)
+        const result = await query.getnotif( USER_ID) 
+       
+        res.json(result) ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+
+router.post('/getfollowers' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member getting followers") ; 
+       
+        const {USER_ID} = req.body ; 
+         console.log(USER_ID)
+        const result = await query.getfollowerlist( USER_ID) 
+       
+        res.json(result) ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+
+router.post('/getallusers' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member getting non followers") ; 
+       
+        const {USER_ID} = req.body ; 
+         console.log(USER_ID)
+        const result = await query.getall( USER_ID) 
+       
+        res.json(result) ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+
+router.post('/addingtosubmissiontable' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member adding them to the submission table") ; 
+       
+        const {ID,USER_ID,STATUS,TIME} = req.body ; 
+         console.log(ID,USER_ID,STATUS)
+        const result = await query.addtosubtable(ID ,USER_ID,STATUS,TIME) 
+       
+    res.json(result) ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
 
 module.exports = router  ; 
