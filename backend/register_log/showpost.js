@@ -150,11 +150,20 @@ handle.subcount = async(ID) =>
     const result = (await con.execute(query , binds , con.options))
     return result ; 
 }
-handle.AcCount = async(ID) => 
+handle.AcCount = async(ID , USERID) => 
 {
     
-    //console.log("in register log AC count ") 
-    //console.log(ID)
+    const query2 = `
+    BEGIN
+    UPDATE_POSITION(:USERID , :ID) ; 
+    END;
+    
+    `
+    
+    const binds2={USERID,ID}
+    const result2 = (await con.execute(query2 , binds2 , con.options))
+    console.log("in register log AC count ") 
+    console.log(ID , USERID)
     const query = `
     BEGIN
      INC_ACPT(:ID) ; 
@@ -164,6 +173,9 @@ handle.AcCount = async(ID) =>
     
     const binds={ID}
     const result = (await con.execute(query , binds , con.options))
+   
+
+    
     return result ; 
 }
 

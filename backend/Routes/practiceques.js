@@ -32,7 +32,19 @@ router.get('/practiceques' , async(req , res )=>
         console.log(error) ; 
     }
 })
-
+router.get('/leaderboard' , async(req , res )=>
+{
+    console.log("here")
+    try 
+    {
+        const result = await query.getleaderboard() ; 
+        res.json(result) ; 
+    }
+    catch(error)
+    {
+        console.log(error) ; 
+    }
+})
 router.get('/problem/:ID' , async(req , res )=>
 {
     
