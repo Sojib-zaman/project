@@ -32,17 +32,29 @@ router.get('/practiceques' , async(req , res )=>
         console.log(error) ; 
     }
 })
-
+router.get('/leaderboard' , async(req , res )=>
+{
+    console.log("here")
+    try 
+    {
+        const result = await query.getleaderboard() ; 
+        res.json(result) ; 
+    }
+    catch(error)
+    {
+        console.log(error) ; 
+    }
+})
 router.get('/problem/:ID' , async(req , res )=>
 {
     
     try 
     {
         const ID =  await req.params.ID ; 
-        console.log("ID:")
-        console.log(ID) ; 
+        //console.log("ID:")
+        //console.log(ID) ; 
         const result = await query.getSpecificQues(ID) ;
-        console.log(result) 
+        //console.log(result) 
         res.json(result) ; 
     }
     catch(error)

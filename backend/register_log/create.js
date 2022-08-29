@@ -60,11 +60,11 @@ handle.create = async(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE ) =>
 handle.verify = async(email , password)=>
 {
     const query = `SELECT * FROM C##PROJECT.APP_USER WHERE EMAIL =:email AND PASSWORD =:password`
-    console.log("here in create verify")
-    console.log(email , password)  ; 
+    //console.log("here in create verify")
+    //console.log(email , password)  ; 
     const binds = {email : email , password: password } 
     const result = (await con.execute(query , binds , con.options)).rows
-    console.log(result) ; 
+   // console.log(result) ; 
     return result ; 
 }
 
@@ -95,6 +95,42 @@ handle.getuserbyname = async(NAME)=>
    console.log("in create");
     console.log(result) ; 
     return result; 
+}
+
+handle.default_search = async(SEARCH_VAL, CATEGORY)=>
+{
+    console.log(SEARCH_VAL, CATEGORY) ; 
+    let query ; 
+    SEARCH_VAL = '%'+SEARCH_VAL+'%' ; 
+    if(CATEGORY=='USER')
+    {
+         query = `
+    SELECT ID , NAME,COUNTRY , IMAGE FROM C##PROJECT.APP_USER WHERE NAME LIKE :SEARCH_VAL`
+    }
+    else if(CATEGORY=='BLOGS')
+    {
+         query = `
+        SELECT ID ,  BLOG_TITLE,BLOG_CONTENT,USER_ID,CATEGORY FROM C##PROJECT.BLOG WHERE BLOG_TITLE LIKE :SEARCH_VAL`
+    }
+    else if(CATEGORY=='QUESTIONS')
+    {
+         query = `
+        SELECT  ID , QUES_CONTENT,CATEGORY,TIME FROM C##PROJECT.QUESTIONS WHERE QUES_CONTENT LIKE :SEARCH_VAL`
+    }
+    else{
+         query = `
+        SELECT  ID , TITLE,CATEGORY FROM C##PROJECT.PRACTICE WHERE TITLE = :SEARCH_VAL`
+    }
+    
+
+
+ 
+    const binds = {SEARCH_VAL:SEARCH_VAL } 
+    
+    const result = (await con.execute(query , binds , con.options))
+   console.log("in DEF SEARCH");
+    console.log(result) ; 
+    return result.rows; 
 }
 
 
@@ -218,6 +254,73 @@ handle.deleteQuestion = async(ID ) =>
     console.log(result) ;
 
     return result ; 
+}
+
+
+handle.getnotif = async(USER_ID ) => 
+{
+    console.log("in get notification")
+    console.log(USER_ID  ) 
+    
+    const query = `
+   SELECT * FROM C##PROJECT.NOTIFICATIONS WHERE USER_ID = :USER_ID 
+    `
+
+    const binds = {USER_ID}
+
+    const result = (await con.execute(query , binds , con.options)).rows
+    //console.log(result) ;
+
+    return result ; 
+}
+
+
+handle.getfollowerlist = async(USER_ID ) => 
+{
+    console.log("in get followers")
+    console.log(USER_ID  ) 
+    
+    const query = `
+   SELECT F.FOLLOWER , U.NAME , U.IMAGE  FROM APP_USER U JOIN FOLLOWS F ON F.FOLLOWER = U.ID  WHERE F.FOLLOWING = :USER_ID 
+    `
+
+    const binds = {USER_ID}
+
+    const result = (await con.execute(query , binds , con.options)).rows
+    //console.log(result) ;
+
+    return result ; 
+}
+
+
+handle.getall = async(USER_ID ) => 
+{
+    console.log("in get followers")
+    console.log(USER_ID  ) 
+    
+    const query = `
+   SELECT U.ID , U.NAME , U.IMAGE  FROM APP_USER U WHERE U.ID != :USER_ID ORDER BY U.ADMIN
+    `
+
+    const binds = {USER_ID}
+
+    const result = (await con.execute(query , binds , con.options)).rows
+    //console.log(result) ;
+
+    return result ; 
+}
+
+handle.addtosubtable = async(ID,USER_ID,STATUS,TIME)=>
+{
+
+    const query = ` INSERT INTO C##PROJECT.SUBMISSION(PROBLEM_ID , USER_ID , STATUS,TIME) VALUES(:ID , :USER_ID , :STATUS,:TIME)`
+ 
+    const binds = {ID,USER_ID,STATUS,TIME} 
+    
+    const result = (await con.execute(query , binds , con.options)).rows
+   console.log("in adding to submission table");
+    console.log(result) ; 
+    return result; 
 }
 
 module.exports = handle ; 
