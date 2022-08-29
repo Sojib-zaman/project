@@ -4,12 +4,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
 import { Link} from 'react-router-dom';
 import Header2 from '../header2';
-import './notification.css'
+import './myfollowers.css'
 
 
-const Notification =  () => {
+const MyFollowers =  () => {
 
-const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const[name , setname] = useState('') ; 
     const added_user ={...name}
     added_user['USER_ID']=loggedInUser.ID ; 
@@ -17,22 +17,22 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     console.log(added_user)
     let a=loggedInUser.ID ;
 
-    const[notif , setnotif] = useState(null) ; 
+    const[followerlist , setfollowerlist] = useState(null) ; 
     
 
     useEffect( ()=>
     
     {
-        console.log("cal")
+        console.log("in use effect getting all the data about my followers")
 
-        const getntdata = async ()=>
+        const getfollowdata = async ()=>
             {
                 console.log("cal")
                 try 
                 {
                     userinfo['USER_ID'] = a ; 
-                    console.log("in try in notifications checking for available notifications") ; 
-                    const res = await fetch('http://localhost:3000/member/getnotifications', {
+                    console.log("in try in my followers trying to find followers") ; 
+                    const res = await fetch('http://localhost:3000/member/getfollowers', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -50,7 +50,7 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
                 // newnt['NOTIFY'] = data3.NOTIFY ; 
                 // newnt['TIME'] = data3.TIME ; 
                 // console.log(newnt) ; 
-                setnotif(data3)
+                setfollowerlist(data3)
                 
                 
         
@@ -64,7 +64,7 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
             }
 
 
-            getntdata();
+            getfollowdata();
          } ,[])
         
        
@@ -76,27 +76,29 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
                     
     return (
         <div>
-            {console.log(notif)}
+            {console.log(followerlist)}
             <Header2/>
         
 
-<div class="vcv-container">
-  <h1>Notifications</h1>
-  <div class="vce-message-box vce vce-message-box-style--success">
-                <div class="vce-message-box-inner">
-                <span class="vce-message-box-icon material-icons"></span>
-                <span class="vce-message-box-text">
-                    <p>{}</p>
-                </span>
+<div class="ffcontainer">
+  <h1 style={{textAlign:"center" , fontSize:"50px"}}>MY FOLLOWERS</h1>
+  <div class="ffmessage-box ff ffmessage-box-style--success">
+                <div class="ffmessage-box-inner">
+                <span class="ffmessage-box-icon material-icons"></span>
+                
                 </div>
             </div>
-{notif&&
-    notif.map(q => (
-            <div class="vce-message-box vce vce-message-box-style--success">
-                <div class="vce-message-box-inner">
-                <span class="vce-message-box-icon material-icons"></span>
-                <span class="vce-message-box-text">
-                    <p>{q.NOTIFY}</p>
+{
+followerlist&&
+    followerlist.map(q => (
+            <div class="ffmessage-box ff ffmessage-box-style--success">
+                <div class="ffmessage-box-inner">
+                <span class="ff-message-box-icon material-icons"></span>
+                <span class="ff-message-box-text">
+                    <div className='st'>
+                    <img style={{float:"left"}} src = {q.IMAGE} width="50px" height="50px"></img>
+                   <p >  { <Link to={"/showblogs/user/"+q.FOLLOWER } > {q.NAME} </Link>} </p>
+                   </div>
                 </span>
                 </div>
             </div>
@@ -113,4 +115,4 @@ const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     )}
     ;
 
-    export default Notification;
+    export default MyFollowers;

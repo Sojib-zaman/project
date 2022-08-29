@@ -3,11 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
 import './login2.css';
 
+
 const LogIn2 = ({state}) => {
     
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     
-
+    const[name , getname] = useState('') ;
 
 
     const [aboutPassword,setAboutPassword]=useState('')
@@ -50,13 +51,14 @@ const LogIn2 = ({state}) => {
         }
     }
     
-    const LogInUser =async (event)=>{
+    const LogInUser =async (event)=>
+    {
         event.preventDefault();
-        console.log("jfsjf") ; 
-        console.log(user);
+        
         
 
         try {
+            console.log(user) ;
             console.log("in try in login2 loginuser") ; 
             const res = await fetch('http://localhost:3000/member/login', {
                 method: 'POST',
@@ -110,13 +112,15 @@ const LogIn2 = ({state}) => {
 
                 
             }
-            else{
+            else
+            {
+
                 setLoggedInUser(data[0]);
-                console.log(data);
+                
                 window.localStorage.setItem("token",JSON.stringify(data[0]))
-                if(data[0].Admin == 1)
-                    console.log("He is admin")
-                else  console.log("He is not an admin")
+                
+               
+
                              
                 
                 navigate(location?.state?.from || '/home', {replace:true})

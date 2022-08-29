@@ -86,6 +86,11 @@ const followuser=(event)=>
         
          fetchData()
         .catch(console.error);
+
+
+        //window.location.reload(false);
+        const btn = document.getElementById('follow');
+        btn.style.display = 'none';
      
 
 
@@ -135,7 +140,8 @@ const followuser=(event)=>
                     
 
 
-
+                        <input type="submit" value="Follow" width="50px" className='createpostBtn' id ='follow' onClick={followuser} />           
+   
 
                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
                         <div class="row">
@@ -149,9 +155,8 @@ const followuser=(event)=>
      
     <div>    
 
-    <input type="submit" value="Follow" width="50px" className='createpostBtn' onClick={followuser} />           
-   
-    <input type="submit" value="Show User's asked questions" width="50px" className='createpostBtn' onClick={userques} />
+  
+    <input type="submit" value="Show User's asked questions" width="50px" className='createpostBtn' id='askq' onClick={userques} />
         {
             otherq && <ShowPersonalQues DEF={visitee.ID}></ShowPersonalQues>
         }

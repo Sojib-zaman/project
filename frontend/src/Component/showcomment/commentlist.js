@@ -2,14 +2,14 @@ const Commentlist = ({comment , title }) => {
     //console.log(comment) ; 
    
       return (
-        <div className="blog-list">
-          <center><h2>{ title }</h2></center>
+        <div id="tot-com">
+          
           {
             comment.map((comnt)=>{
-             // console.log(comnt.COMMENTS) ; 
-              return <div>
-                      <h2>Commented by {comnt.NAME}</h2>
-                      <h1>{comnt.COMMENTS}</h1>
+             
+              return <div className="comment-list" >
+                      <h2 style={{backgroundColor:"#84ed5e" ,color:"beige", width:"190px" ,padding:"2px" ,margin:"1px"}}>{comnt.NAME}</h2>
+                      <h1 style={{padding:"0px" ,marginLeft:"2px"}}>    {    comnt.COMMENTS}</h1>
                       </div>
             
             }

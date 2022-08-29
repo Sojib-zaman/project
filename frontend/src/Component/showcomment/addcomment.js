@@ -85,22 +85,18 @@ const AddComment = ({blog_id}) => {
     return (
         <div>
             
-            <div className='addPost-container'>
-                
-                <div className='addPost-form'>
+            <div id='addComment-container'>
+                <br></br>
+                <h3 style={{margin:"20px"}}>Add a Comment</h3>
+                <div className='addc-form'>
                     
-
-                    <div className='form'>
-                        
-                        <form action="" className='addPost-form'>
-                            
-                            
+                        <form action="" className='addC-fm'>
+    
+                            <textarea name="COMMENTS" id="area" cols="100" rows="5" onChange={handleChange} required></textarea>
                            
-                            <textarea name="COMMENTS" id="area" cols="100" rows="5" placeholder='Add Comment' onChange={handleChange} required></textarea>
-                            <br></br><br></br>
-                            <input type="submit" value="Submit" className='createpostBtn' onClick={handleSubmit} />
+                            <input type="submit" value="Submit" id='sbcm' onClick={handleSubmit} />
                         </form>
-                    </div>
+                 
                 </div>
                 <div>
                     <div></div>

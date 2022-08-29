@@ -65,26 +65,18 @@ const ShowAnswer = ({Ques_id})=>
     } , [])
 return (
     <div>
-        <div className="profile-container">
-            <div className="profile-left">
-            </div>
-            <div className="profile-right">
-                <div className="profile-right-header">
-                   
-                </div>
-                <div className="profile-info">
-                    
-                
+         <div id="Answer-container">
+            
+            
+            <div className="Answer-header">
+                <h1 style={{backgroundColor: "aquamarine", height: "20px",padding: "5px"}}>Answers</h1> 
+           
+            
                 
                     { answers && < Answerlist answer={answers}/>
                     } 
                     
-                    
-                    <div>
-                        
                     </div>
-                </div>
-            </div>
             <div>
             </div>
         </div>

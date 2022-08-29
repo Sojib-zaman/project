@@ -138,7 +138,7 @@ const [makeadmin, setmake] = useState('');
   };
 
   return (
-    <div className="App">
+    <div className="Admin">
       <Header2></Header2>
       
       <div className="information">
@@ -189,7 +189,6 @@ const [makeadmin, setmake] = useState('');
           }}
         />
         
-        
         <button style={{backgroundColor:"blue"}} onClick={addNewUser }>Add User</button>
 
 
@@ -199,8 +198,7 @@ const [makeadmin, setmake] = useState('');
 
       </div>
       <div className="employees">
-        <br/><br/>
-
+      <br/><br/>
         <label>User name to find user:</label>
         <input
           type="text"
@@ -209,7 +207,6 @@ const [makeadmin, setmake] = useState('');
           }}
         />
         <button style={{backgroundColor:"blue"}} onClick={getUsers}>Show user</button>
- { }   
         {
         
               

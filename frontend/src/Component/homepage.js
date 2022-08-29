@@ -38,7 +38,7 @@ const HomePage = (props) => {
   `;
   
   const Section = styled.section`
-    min-height: 20px;
+  min-height: 20px;
     padding: 16px 0;
     box-sizing: content-box;
     text-align: center;

@@ -56,13 +56,12 @@ return (
     <div>
         <div className="profile-container" id="container">
             <Header2/>
-            <div className="profile-left">
-            </div>
+           
             <div className="profile-right">
                 <div className="profile-right-header">
                     <h1>BLOG POSTS</h1>
                 </div>
-                <div className="profile-info" id='profile'>
+                <div>
                     
                 
                 

@@ -2,21 +2,21 @@ const Answerlist = ({answer  }) => {
     //console.log(answer) ; 
    
       return (
-        <div className="blog-list">
-          <div className="blog-preview">
+        <div id="tot-ans">
+          
           {
             answer.map((ans)=>{
              // console.log(ans.ANS_CONTENT) ; 
-              return <div>
-                <h2>Answered by {ans.NAME}</h2>
+              return<div className="answer-list" >
+               <h2 style={{backgroundColor:"#84ed5e" ,color:"black", width:"300px" ,padding:"2px" ,margin:"1px" , fontWeight:"bolder"}}>Answered by {ans.NAME}</h2>
                 <h2>Time : {ans.TIME}</h2>
-                      <h3>{ans.ANS_CONTENT}</h3>
+                <h2 style={{fontFamily: "Montserrat ,sans-serif",padding:"0px" ,marginLeft:"2px" , paddingBottom:"20px"}}>{ans.ANS_CONTENT}</h2>
                       </div>
             
             }
             )
           }
-          </div>
+         
         </div>
       );
     }

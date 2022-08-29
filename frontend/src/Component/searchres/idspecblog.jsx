@@ -4,28 +4,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
 import PersonalQuesList from './personalques';
 //import NavBar from '../NavBar/NavBar';
-import './personal.css'
+
 import Header2 from '../header2';
 
 
-const ShowPersonalQues = ({DEF})=> 
+const IDspecBlog = ({BLOG_ID})=> 
 {
-    console.log(DEF);
+    console.log(BLOG_ID);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [ Questions,setQuestions] = useState(null);
+    const [ Blogs,setBlogs] = useState(null);
     let title = '' ; 
 
     let navigate = useNavigate() ; 
     let location  = useLocation() ; 
     const[userinfo , setuserinfo] = useState({})
-    let a =0;
-    if(DEF==0)
-        {
-             a = loggedInUser.ID ; 
-             title="My Questions"
-            
-        }
-    else { a=DEF ; title="User's Questions" }
+   
 
     useEffect( ()=>
     {
@@ -34,8 +27,8 @@ const ShowPersonalQues = ({DEF})=>
            
             try {
         
-                   userinfo['userID'] = a ; 
-                const res = await fetch('http://localhost:3000/showpost/personalquestions',  {
+                   userinfo['BLOG_ID'] = BLOG_ID ; 
+                const res = await fetch('http://localhost:3000/showpost/idspecpost',  {
                     method: 'POST',
                   
                     
@@ -55,8 +48,8 @@ const ShowPersonalQues = ({DEF})=>
                 }
                 else{
                     //console.log(data[0]) ; 
-                    setQuestions(data)
-                    //console.log(data);
+                    setBlogs(data)
+                    console.log(data);
                     
                     
                     
@@ -87,7 +80,7 @@ return (
                 
                     { 
                     
-                         Questions && < PersonalQuesList questions={Questions} title={title}/>
+                        
                     
                    
                     } 
@@ -108,4 +101,4 @@ return (
         );
     };
     
-    export default ShowPersonalQues;
+    export default IDspecBlog;

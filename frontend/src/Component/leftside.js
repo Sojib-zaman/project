@@ -3,12 +3,10 @@ import React from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../App';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 const Leftside = (props) => {
   const [loggedInUser,setLoggedInUser] = useContext(UserContext);
   let navigate  = useNavigate();
   let location = useLocation();
-
   return (
     <Container>
       <ArtCard>
@@ -35,16 +33,16 @@ const Leftside = (props) => {
           <span> 
             <img src="/images/item-icon.svg" alt="" />
              My Saved Items
-            
-            
+
+
           </span></a>
-          
+
         </Item>
       </ArtCard>
 
       <CommunityCard>
-        <a>
-          <span>Followers</span>
+      <a style={{textDecoration:"none"}} href='/showfollowers'>
+          <span>My Followers</span>
         </a>
         <a>
           <span>
@@ -53,9 +51,9 @@ const Leftside = (props) => {
           </span>
         </a>
         <a>
-          <span>Follow Hashtags</span>
+          <span>Follow People</span>
         </a>
-        <a>
+        <a style={{textDecoration:"none"}} href='/showallusers' >
           <span>Discover more</span>
         </a>
       </CommunityCard>
@@ -67,7 +65,6 @@ const Container = styled.div`
   grid-area: leftside;
   position: fixed;
   width:275px;
-
 `;
 
 const ArtCard = styled.div`
@@ -178,7 +175,6 @@ const Item = styled.a`
     svg {
       color: rgba(0, 0, 0, 0.6);
     }
-
   }
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);

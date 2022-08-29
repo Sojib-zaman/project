@@ -1,8 +1,8 @@
 import './App.css';
 //import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './Component/Home/Home'
 
-import Home from './Component/Home/Home'
+
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,12 +16,13 @@ import AskQues2 from './Component/askques/askques2';
 import Login from './Component/login';
 import LogIn2 from './Component/login2/login2';
 import Signup from './Component/register2/signup';
+import Profile from './Component/Profile/Profile';
 import AskQues from './Component/askques/askques';
 //import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 //import Signup from './Component/register2/signup';
 import Showpersonalblog from './Component/showblogpost/personal';
 import {createContext, useState} from 'react';
-import Nav from './Component/Home/TopComp/Nav/Nav';
+
 import Blog from './Component/BlogPost/blog';
 import Showb from './Component/showblogpost/showb2';
 import Showq from './Component/showallques/showq';
@@ -33,9 +34,11 @@ import Update from './Component/Profile/Update';
 import Otheruser from './Component/Profile/otheruser';
 import ShowAdminOptions from './Component/AdminControl/AdminControl';
 import Notification from './Component/Notifications/notification';
-
-
-
+import MyFollowers from './Component/followers/myfollowers';
+import FollowNew from './Component/followers/followperson';
+import Submissions from './Component/Submission/submission';
+import Leaderboard from './Component/Submission/Leaderboard';
+import DefaultSearch from './Component/searchres/defsearch';
 export const UserContext=createContext();
 
 function App() {
@@ -64,25 +67,26 @@ function App() {
           <Route path='/' element={<Login/>}/>
           <Route path='/login' element={<LogIn2/>}/>
           <Route path='/profile' element={<Profile2/>}/>
-          <Route path='/nav' element={<Nav/>}/>
+          <Route path='/notifications' element={<Notification/>}/>
           <Route path='/blogs' element={<Blog/>}/>
           <Route path='/questions' element={<AskQues2/>}/>
           <Route path='/showblogs' element={<Showb/>}/>
           <Route path='/showquestions' element={<Showq/>}/>
-          <Route path='/notifications' element={<Notification/>}/>
           <Route path='/personalposts' element={<Showpersonalblog DEF = {0}/>}></Route>
           <Route path='/personalquestions' element={<ShowPersonalQues DEF = {0}></ShowPersonalQues>}></Route>
-          <Route path='/admincontrol' element={<ShowAdminOptions/>}/>
-
-
+          <Route path='/AdminControl' element={<ShowAdminOptions/>}/>
+          <Route path='/submissions/:id' element={<Submissions/>}/>
+          <Route path='/Leaderboard' element={<Leaderboard/>}/>
           <Route path='/practice' element ={<PracticeSet></PracticeSet>}></Route>
           <Route path='/practice/problem/:id' element={<Submit></Submit>}/>
           <Route path='/savedposts' element={<ShowSaved></ShowSaved>}/>
           <Route path='showblogs/user/:id' element={<Otheruser></Otheruser>}/>
           <Route path='showquestions/user/:id' element={<Otheruser></Otheruser>}/>
           <Route path='/updateinfo' element={<Update></Update>}/>
-          
-          <Route path="*" element={<p>There's nothing here: 404!</p>} />   
+          <Route path='/showfollowers' element={<MyFollowers></MyFollowers>}/>
+          <Route path='/showallusers' element={<FollowNew></FollowNew>}/>
+          <Route path='/defsearchvalues' element={<DefaultSearch/>}/>
+          <Route path="*" element={<p style={{color:"coral"}}>Are you sure you are visiting the correct URL ? !</p>} />   
         
         </Routes>
 

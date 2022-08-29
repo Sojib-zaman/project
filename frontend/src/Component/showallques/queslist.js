@@ -13,20 +13,25 @@ const Questionlist = ({ Questionlist, title, Admin}) =>
     
   
       return (
-        <div className="blog-list">
-          <center><h2>{ title }</h2></center>
+        <div id="bloglist_2">
+        <center id = "headtitle">{ "WELCOME TO PROJECT FORNAX QUESTION SECTION" }</center>
           {
-          
           nblog[1][1].map(Question => (
-          <div className="blog-preview"  >
+            <div id='bloglist-preview' >
+
+        <div id="ques_content">
+              <h1>{ Question.QUES_CONTENT }</h1></div>
+              
            
-              <h1>{ Question.QUES_CONTENT }</h1>
-              <h3>Asked by 
-              <Link to={'user/'+Question.ID_1 } >
-                {Question.NAME}</Link></h3>
+            <center id='otherQuesInfo'>
+              <h3>Asked by :
+              <Link style={{textDecoration : "None !important"}} to={'user/'+Question.ID_1 } >
+                { Question.NAME}</Link></h3>
               <h4>TIME : {Question.TIME}</h4>
               <h4>Category : {Question.CATEGORY}</h4>
-              
+              </center>
+             
+            
   
               {
             <ShowAnswer Ques_id = {Question.ID}></ShowAnswer>

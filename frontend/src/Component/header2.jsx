@@ -20,6 +20,10 @@ const Header2 = (props) => {
     else admin= true ;
 
     console.log(admin)
+   
+        
+
+
   return (
     <Container>
       <Content>
@@ -45,11 +49,17 @@ const Header2 = (props) => {
         </Logo>
         <Search>
           <div>
+          <form id="myForm">
             <input type="text" placeholder="Search" />
+            <Link  to='/defsearchvalues' style={{ backgroundColor:"cyan"}} id='homesearch'>search</Link>
+          </form>
           </div>
+          
           <SearchIcon>
+          
             <img src="/images/search-icon.svg" alt="" />
           </SearchIcon>
+          
         </Search>
         <Nav>
           <NavListWrap>
@@ -100,7 +110,6 @@ const Header2 = (props) => {
 
             <Work>
               <a>
-              
                 <img src="/images/nav-work.svg" width="5px" alt="" />
                 <span>
                     Notifications
@@ -109,9 +118,7 @@ const Header2 = (props) => {
               </a>
               <Notification> <a href='/notifications'>
               <button className='topNavBtn'>Show Notifications</button>
-              </a>
-              
-              </Notification>
+              </a></Notification>
             </Work>
           </NavListWrap>
         </Nav>
@@ -264,6 +271,7 @@ const SignOut = styled.div`
     font-size: 11px;
     background: transparent;
     color: #000;
+ 
   }
 `;
 
@@ -313,7 +321,7 @@ button{
 
 const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
-
+  
   &:hover {
     ${Notification} {
       align-items: center;

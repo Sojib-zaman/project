@@ -66,15 +66,17 @@ const Showq = ()=>
     },[])
 return (
     <div>
-        <Header2></Header2>
-        <div className="profile-container">
-            <div className="profile-left">
-            </div>
-            <div className="profile-right">
-                <div className="profile-right-header">
-                    <h1>Question Segment</h1>
+        
+        <div className="profile-container" id="qcontainer">
+           <Header2></Header2>
+            
+        <div className="profile-right">
+            <div></div>
+                <div className="top-header">
+                    <h1>QUESTIONS ASKED BY USERS</h1>
                 </div>
-                <div className="profile-info">
+        </div>
+               
                     
                 
                
@@ -82,15 +84,11 @@ return (
                     } 
                     
                     
-                    <div>
-                        
-                    </div>
-                </div>
-            </div>
-            <div>
-            </div>
-        </div>
-    
+                   
+                
+           </div>
+            
+
     </div>
         );
     };

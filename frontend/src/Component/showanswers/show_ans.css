@@ -6,8 +6,26 @@
     height: 510px;
     
 }
+.answer-list
+{
+  font-family: 'Times New Roman', Times, serif;
+line-height: 2;
+margin-bottom: -11px;
+margin-top: 31px;
+border: 2px solid black;
+}
+#tot-ans {
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
 .profile-left{
     border: 0;
+}
+#Answer-container
+{
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px solid black;
+
 }
 .profile-right{
     background-color: rgb(226, 231, 235);
@@ -25,19 +43,26 @@
     text-align: justify;
     border: 2px solid black;
 }
+#homesearch
+{
+  width: 145px;
+height: 20px;
+margin-top: 3px;
+border-radius: 3px;
+color: black;
+font-size: 12px ;
+font-weight: bolder;
 
+
+
+
+}
 .blog-preview {
     padding: 10px 16px;
     margin: 20px 0;
     border-bottom: 1px solid #fafafa;
   }
-  .blog-preview:hover {
-    color: black ; 
-    font-size: 20px;
-    box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
-    background-color:chartreuse
- }
- 
+
  .blog-preview h3 {
   font-size: 15px ;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; 

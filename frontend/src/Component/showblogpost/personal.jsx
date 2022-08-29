@@ -5,6 +5,7 @@ import { UserContext } from '../../App';
 import PersonalBlogList from './showpersonal';
 //import NavBar from '../NavBar/NavBar';
 import './personal.css'
+import Header2 from '../header2';
 
 
 const Showpersonalblog = ({DEF})=> 
@@ -68,6 +69,7 @@ const Showpersonalblog = ({DEF})=>
     },[])
 return (
     <div>
+        <Header2></Header2>
         <div className="profile-container">
             <div className="profile-left">
             </div>

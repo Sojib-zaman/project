@@ -9,47 +9,59 @@ import BlogsMain from "./showblogpost/blogsmain";
 const Main = (props) => {
 
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-  const [blogs,setPosts] = useState(null);
+  const [homeblogs,sethblog] = useState(null);
   let navigate = useNavigate() ; 
   let location  = useLocation() ; 
-
-  useEffect(()=>
+  const[userinfo , setuserinfo] = useState({}) ; 
+  let a =0;
+  a=loggedInUser.ID ; 
+  useEffect( ()=>
   {
+      const need = async()=>
+      {
+          console.log("try strart")
+          try {
       
-      let url = 'http://localhost:3000/showpost/showblogs' ;
-      
-          try
-          {
-              fetch(url) 
-       .then(res => 
-          {
-              return res.json()
-          }
-          ) 
-          .then(
-              (data)=>
-              {
-                  setPosts(data)
-                  //console.log(data)
+                 userinfo['userID'] = a ; 
+              const res = await fetch('http://localhost:3000/showpost/showfollowingposts',  {
+                  method: 'POST',
+                
+                  
+                  headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(userinfo)
+                   
+              } )
+              
+              const data = await res.json()  
+              console.log("here data")
+              console.log(data)
+              if(data.length === 0){
+              
               }
-
-              
-          ).catch(err => 
-          {
-              console.log(err.message) ; 
-          })
+              else{
+                  //console.log(data[0]) ; 
+                  sethblog(data)
+                  //console.log(data);
+                  
+                  
+                  
+              }
       
+          } catch (error) {
+              console.log(error);
           }
-          catch
-          {
-              console.log("eroro")
-          }
-              
+      }
+
+      need() ;
+      
+      
   },[])
 
   return <Container>
     <ShareBox>
-      Share
     
     <div>
       <img src="/images/user.svg" alt=""/>
@@ -93,16 +105,17 @@ const Main = (props) => {
     </ShareBox>
     
     <Blogs>
-    <span>Recent</span>
+    <span></span>
     <div>
       <br/>
       
-    { blogs && < BlogsMain blogs={blogs} />
+    { homeblogs && < BlogsMain blogs={homeblogs} />
                     } 
                     
     </div>
-    </Blogs>
 
+    </Blogs>
+          
 
 
 
@@ -130,8 +143,6 @@ flex-direction: column;
 color:  #958b7b;
 margin: 0 0 8px;
 background: white;
-
-
 div{
   button {
       outline: none;
@@ -144,9 +155,6 @@ div{
       display: flex;
       align-items: center;
       font-weight: 600; 
-
-
-
   }
   &:first-child{
   display: flex;
@@ -157,7 +165,6 @@ div{
     height: 48px;
     border-radius: 50%;
     margin-right: 8px;
-
   }
   button {
     margin: 4px 0;
@@ -168,8 +175,6 @@ div{
     background-color: white;
     text-algn: left;
     
-
-
   }
   
   }
@@ -177,61 +182,46 @@ div{
     display: flex;
     justify-content: space-around;
     padding-bottom: 4px;
-
     button{
       img{
         margin: 0 4px 0 20px;
         height: 30px;
         
-
         
-
       }
       span {
         color: #70b5f9;
       }
     }
-
-
-
    
   }
   
   
-
 }
-
 `;
 
 const Article = styled(CommonCard)`
   padding=0;
   margin= 0 0 8px;
   overflow: visible;
-
-
-
 `;
 
 const SharedActor= styled.div`
-
   padding-right: 40px;
   flex-wrap: nowrap;
   padding: 12px 16px 0;
   margin-bottom: 8px;
   align-items: center;
   display: flex;
-
   a{
     margin-right: 12px;
     flex-grow: 1;
     overflow: hidden;
     display: flex;
     text-decoration: none;
-
     img{
       width: 48px;
       height: 48px;
-
     }
     & > div{
       display:flex;
@@ -240,24 +230,19 @@ const SharedActor= styled.div`
       flex-basis: 0;
       margin-left: 8px;
       overflow: hidden;
-
       span{
         text-align: left;
         &:nth-child(1){
           font-size: 14px;
           font-weight: 700;
           color: rgba(0, 0, 0, 1);
-
         }
-
         &:nth-child(n+1){
           font-size: 12px;
           color: rgba(0,0,0,0.6);
         }
       }
       
-
-
       }
     }
   }
@@ -272,7 +257,6 @@ const SharedActor= styled.div`
       float: right;
     }
   }
-
 `;
 
 const Description= styled.div` 
@@ -281,7 +265,6 @@ const Description= styled.div`
   color: rgba(0, 0, 0, 0.9);
   font-size: 14px;
   text-align: left;
-
 `;
 
 const SharedImg= styled.div` 
@@ -290,12 +273,10 @@ const SharedImg= styled.div`
   display: block;
   position: relative;
   background-color: #f9fafb;
-
   img {
     object-fit; contain;
     width: 100%;
     height: 100%;
-
   }
 `;
 
@@ -328,13 +309,9 @@ flex-direction: column;
 color:  #958b7b;
 margin: 0 0 8px;
 background: white;
-
 div{
   color: #000;
 }
-
-
-
 `
 
 export default Main;
