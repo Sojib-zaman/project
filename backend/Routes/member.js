@@ -216,6 +216,25 @@ router.post('/getallusers' , async(req , res) =>
     }
 }
 )
+router.post('/fcount' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member getting non followers") ; 
+       
+        const {USER_ID} = req.body ; 
+         console.log(USER_ID)
+        const result = await query.fcount( USER_ID) 
+       
+        res.send(result) ; 
+        
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
 
 router.post('/addingtosubmissiontable' , async(req , res) =>
 {

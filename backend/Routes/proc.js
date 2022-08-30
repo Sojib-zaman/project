@@ -136,12 +136,14 @@ router.post('/isfollowing' , async(req , res) =>
         //console.log("in practice AC count") ; 
            //console.log(req.body)
         const {FOLLOWEE_ID , FOLLOWER_ID} = req.body ; 
-        
+        console.log("in proc")
+        console.log(FOLLOWER_ID , FOLLOWEE_ID )
         //console.log(ID)
-        const result = await query.checkfollowing(FOLLOWEE_ID , FOLLOWER_ID) 
+        const result = await query.checkfollowing(FOLLOWEE_ID , FOLLOWER_ID) ;
+        console.log("in PROC")
         console.log(result);
        
-        res.end() ; 
+        res.send(result) ; 
     }
     catch(err)
     {

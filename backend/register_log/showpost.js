@@ -1,3 +1,4 @@
+const OracleDB = require('oracledb');
 const { DATE } = require('oracledb');
 const con = require('../Connection') ; 
 
@@ -22,8 +23,9 @@ handle.fileNameupload = async(FILE_NAME) =>
     
     //console.log("in register log showpost") 
     const query = `
-    INSERT INTO C##PROJECT.RESOURCES(FILE_NAME )
-    VALUES (:FILE_NAME )
+    BEGIN
+        ADD_RESOURCE(:FILE_NAME);
+    END;
     `
     const binds={FILE_NAME}
     const result = (await con.execute(query , binds , con.options))
@@ -270,14 +272,16 @@ handle.checkfollowing = async(FOLLOWEE_ID , FOLLOWER_ID) =>
     
     //console.log("in register log AC count ") 
     //console.log(ID)
+    console.log(FOLLOWER_ID , FOLLOWEE_ID )
+    console.log("checking") ; 
     const query = `
     BEGIN
-     SELECT ISFOLLOWER(:FOLLOWER_ID , :FOLLOWEE_ID) ; 
+     :RET :=  IS_FOLLOWER(:FOLLOWER_ID , :FOLLOWEE_ID) ; 
     END;
     
     `
     
-    const binds={FOLLOWER_ID , FOLLOWEE_ID}
+    const binds={FOLLOWER_ID , FOLLOWEE_ID , RET:{dir:OracleDB.BIND_OUT , type: OracleDB.NUMBER},};
     const result = (await con.execute(query , binds , con.options))
 
    

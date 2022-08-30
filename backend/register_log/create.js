@@ -1,16 +1,16 @@
-
+const OracleDB = require('oracledb');
+const { DATE } = require('oracledb');
 const con = require('../Connection') ; 
 
 const handle = {} 
 
-// add the type as a dropdown option maybe 
-//hardcode admin for it 
 handle.createAdmin = async(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE , ADMIN  ) => 
 {
     console.log(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE, ADMIN   ) 
     
-    const query = `INSERT INTO C##PROJECT.APP_USER (NAME , PASSWORD , COUNTRY , EMAIL , IMAGE , Admin)
-    VALUES (:NAME ,  :PASSWORD ,  :COUNTRY , :EMAIL , :IMAGE, :ADMIN   )
+    const query = ` BEGIN 
+    CREATE_ADMIN( :NAME , :PASSWORD , :COUNTRY , :EMAIL , :IMAGE , :ADMIN);
+    END;
     `
 
     const binds = {NAME , PASSWORD , COUNTRY , EMAIL , IMAGE , ADMIN}
@@ -27,9 +27,10 @@ handle.makeadmin = async(ID) =>
 {
     console.log(ID) 
     
-    const query = `UPDATE APP_USER
-    SET ADMIN=1
-    WHERE ID = :ID
+    const query = `
+    BEGIN
+        MAKE_ADMIN(:ID);
+    END;
     `
 
     const binds = {ID}
@@ -45,8 +46,9 @@ handle.create = async(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE ) =>
 {
     console.log(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE ) 
     
-    const query = `INSERT INTO C##PROJECT.APP_USER (NAME , PASSWORD , COUNTRY , EMAIL , IMAGE )
-    VALUES (:NAME ,  :PASSWORD ,  :COUNTRY , :EMAIL , :IMAGE )
+    const query = `BEGIN
+    USER_SIGNUP(:NAME , :PASSWORD , :COUNTRY , :EMAIL , :IMAGE) ; 
+    END ;
     `
 
     const binds = {NAME , PASSWORD , COUNTRY , EMAIL , IMAGE }
@@ -149,9 +151,10 @@ handle.update = async(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE , ID ) =>
 {
     console.log(NAME , PASSWORD , COUNTRY , EMAIL , IMAGE, ID  ) 
    
-    const query = ` UPDATE APP_USER
-    SET NAME = :NAME , PASSWORD= :PASSWORD , EMAIL = :EMAIL , IMAGE= :IMAGE , COUNTRY = :COUNTRY 
-    WHERE ID = :ID
+    const query = ` 
+    BEGIN
+    UPDATE_USERINFO(:NAME , :PASSWORD , :COUNTRY , :EMAIL , :IMAGE, :ID ) ; 
+    END ;
     `
 
     const binds = {NAME , PASSWORD , COUNTRY , EMAIL , IMAGE , ID  }
@@ -172,39 +175,82 @@ handle.delete = async(ID,EMAIL ) =>
     WHERE USER_ID = :ID 
     `
     let resultx= (await con.execute(queryx , bindsx , con.options))
+
+
     queryx = ` 
     DELETE  FROM COMMENTS 
     WHERE USER_ID = :ID 
     `
     resultx= (await con.execute(queryx , bindsx , con.options))
+
+    //REMOVE FROM UPVOTE 
     queryx = ` 
     DELETE  FROM BLOG 
     WHERE USER_ID = :ID 
     `
     resultx= (await con.execute(queryx , bindsx , con.options))
 
-
-
-
-
     const bindsy = {ID}
    
-    let queryy = ` 
+
+
+    const aqueryy = `
     DELETE FROM ANSWERS 
     WHERE USER_ID = :ID
-    `
-    let resulty= (await con.execute(queryy , bindsy , con.options))
-    queryy = ` 
+    `;
+    const bixxndsy = {ID : ID ,} ; 
+    const resultya= (await con.execute(aqueryy , bixxndsy , con.options))
+
+
+    const queryy = ` 
     DELETE FROM QUESTIONS 
     WHERE USER_ID = :ID
     `
-     resulty= (await con.execute(queryy , bindsy , con.options))
+    let resulty= (await con.execute(queryy , bindsy , con.options))
 
 
+    let qffollow = ` DELETE FROM FOLLOWS 
+    WHERE FOLLOWING = :ID OR FOLLOWER = :ID 
+   
+    `
+
+    const biands = {ID}
+
+    let reasult = (await con.execute(qffollow , biands , con.options))
+
+
+    let w = ` DELETE FROM NOTIFICATIONS 
+    WHERE USER_ID=:ID
+   
+    `
+
+     
+
+     reasult = (await con.execute(w, biands , con.options))
     
+     let w2 = ` DELETE FROM LEADERBOARD 
+     WHERE USER_ID=:ID
 
-    const query = `  DELETE FROM APP_USER 
-    WHERE ID = :ID
+ `  
+ const val = {ID} ;
+
+  let reult = (await con.execute(w2, val , con.options))
+  console.log("for leader")
+  console.log(reult) ;
+
+  w = ` DELETE FROM SUBMISSION 
+  WHERE USER_ID=:ID
+
+`
+
+
+
+    reasult = (await con.execute(w, biands , con.options))
+
+
+const query = ` BEGIN
+    DELETE_USER(:ID);
+    END;
    
     `
 
@@ -225,6 +271,7 @@ handle.delete = async(ID,EMAIL ) =>
     console.log(result) ;
 
     return result ; 
+    
 }
 
 
@@ -321,6 +368,30 @@ handle.addtosubtable = async(ID,USER_ID,STATUS,TIME)=>
    console.log("in adding to submission table");
     console.log(result) ; 
     return result; 
+}
+
+
+handle.fcount = async(USER_ID) => 
+{
+    
+    //console.log("in register log AC count ") 
+    //console.log(ID)
+    console.log(USER_ID )
+    console.log("checking") ; 
+    const query = `
+    BEGIN
+     :RET :=  FOLLOWER_COUNT(:USER_ID) ; 
+    END;
+    
+    `
+    
+    const binds={USER_ID , RET:{dir:OracleDB.BIND_OUT , type: OracleDB.NUMBER},};
+    const result = (await con.execute(query , binds , con.options))
+
+   
+
+
+    return result ; 
 }
 
 module.exports = handle ; 
