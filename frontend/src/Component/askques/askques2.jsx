@@ -89,13 +89,13 @@ const AskQues2 = () => {
       
     
     <div>
-      <img src="/images/user.svg" alt=""/>
+      <img src={loggedInUser.IMAGE} alt=""/>
       <button>
         <span>
-        <textarea name="QUES_CONTENT" id="area" cols="83" rows="2" placeholder='Ask your Question' onChange={handleChange} required></textarea>
+        <textarea name="QUES_CONTENT" id="area" cols="83" rows="2" placeholder='  Ask your Question' onChange={handleChange} required></textarea>
           </span></button>
           <br></br><br></br>
- <input type="text" name="CATEGORY" id="CATEGORY" onChange={handleChange}  placeholder='Category' required/>
+ <input type="text" name="CATEGORY" id="CATEGORY" onChange={handleChange}  placeholder='  Category' required/>
 
           
     </div>
@@ -125,9 +125,10 @@ const AskQues2 = () => {
     </Container>
     <div>
   <a href="/showquestions">
-<input style={{width:"82%" , marginTop:"-200px" , paddingLeft:"30px"}} type="submit" value="Show All Questions" width="50px" className='creater' />
+<input style={{width:"40%" , marginTop:"-200px" , paddingLeft:"50px" , marginLeft:"400px" , border : "3px solid black" }} type="submit" value="Show All Questions" width="50px" className='creater' />
 </a>
 </div>
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br>
     <Footer></Footer>
     </div>
     

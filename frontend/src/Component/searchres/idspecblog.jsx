@@ -2,36 +2,33 @@ import React, { useEffect } from 'react';
 import  { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
-import PersonalBlogList from './showpersonal';
+import PersonalQuesList from './personalques';
 //import NavBar from '../NavBar/NavBar';
-import './personal.css'
+
 import Header2 from '../header2';
 
 
-const Showpersonalblog = ({DEF})=> 
+const IDspecBlog = ({BLOG_ID})=> 
 {
+    console.log(BLOG_ID);
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [blogs,setPosts] = useState(null);
+    const [ Blogs,setBlogs] = useState(null);
+    let title = '' ; 
+
     let navigate = useNavigate() ; 
     let location  = useLocation() ; 
     const[userinfo , setuserinfo] = useState({})
-    let title = '' ; 
-    let a =0;
-    if(DEF==0)
-        {
-             a = loggedInUser.ID ; title="My Blogs"
-        }
-    else { a=DEF ;title="User's Blogs" } 
+   
 
     useEffect( ()=>
     {
         const need = async()=>
         {
-            console.log("try strart")
+           
             try {
         
-                   userinfo['userID'] = a ; 
-                const res = await fetch('http://localhost:3000/showpost/personalposts',  {
+                   userinfo['BLOG_ID'] = BLOG_ID ; 
+                const res = await fetch('http://localhost:3000/showpost/idspecpost',  {
                     method: 'POST',
                   
                     
@@ -44,15 +41,15 @@ const Showpersonalblog = ({DEF})=>
                 } )
                 
                 const data = await res.json()  
-                console.log("here data")
+                
                 console.log(data)
                 if(data.length === 0){
                 
                 }
                 else{
                     //console.log(data[0]) ; 
-                    setPosts(data)
-                    //console.log(data);
+                    setBlogs(data)
+                    console.log(data);
                     
                     
                     
@@ -70,18 +67,22 @@ const Showpersonalblog = ({DEF})=>
 return (
     <div>
         <Header2></Header2>
-        <div className="other-p">
+        <div className="profile-container">
             <div className="profile-left">
             </div>
             <div className="profile-right">
                 <div className="profile-right-header">
-                    <h1>BLOG POSTS</h1>
+                    <h1>ASKED QUESTIONS</h1>
                 </div>
                 <div className="profile-info">
                     
+              
                 
-                
-                    { blogs && < PersonalBlogList blogs={blogs}  title={title}/>
+                    { 
+                    
+                        
+                    
+                   
                     } 
 
                     
@@ -100,4 +101,4 @@ return (
         );
     };
     
-    export default Showpersonalblog;
+    export default IDspecBlog;

@@ -3,6 +3,7 @@ import Leftside from "./leftside";
 import Rightside from "./rightside";
 import Header2 from "./header2";
 import Main from "./main";
+import Footer from "./Footer/Footer";
 const HomePage = (props) => {
     return (
       <Container>
@@ -20,8 +21,10 @@ const HomePage = (props) => {
         <Header2/>
         <Rightside/>
         
+        
           
         </Layout>
+        <Footer/>
       </Container>
     );
   };
@@ -48,6 +51,7 @@ const HomePage = (props) => {
     h5 {
       color: #0a66c2;
       font-size: 14px;
+      padding-top: 11px;
       a {
         font-weight: 700;
       }
@@ -56,6 +60,7 @@ const HomePage = (props) => {
       font-size: 14px;
       color: #434649;
       font-weight: 600;
+      
     }
     @media (max-width: 768px) {
       flex-direction: column;

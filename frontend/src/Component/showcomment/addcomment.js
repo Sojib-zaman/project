@@ -9,6 +9,7 @@ const AddComment = ({blog_id}) => {
 
     const [loggedInUser,setLoggedInUser] = useContext(UserContext);
     const [addcomment , setAddComment] = useState([]) ; 
+    const [addcmnt , setcmnt] = useState([]) ; 
     let navigate = useNavigate() ; 
     let location = useLocation() ; 
 
@@ -47,7 +48,7 @@ const AddComment = ({blog_id}) => {
     }
 
     
-    const handleSubmit= (event)=>
+    const handleSubmit= async (event)=>
     {
         event.preventDefault();
         console.log(addcomment) ; 
@@ -76,6 +77,25 @@ const AddComment = ({blog_id}) => {
         } catch (error) {
             console.log(error);
         }
+
+
+        const y={...addcmnt} ; 
+        y['USER_ID'] = loggedInUser.ID ; 
+        y['BLOG_ID'] = blog_id ; 
+        setcmnt(y) ;
+
+        console.log("SENDING DATA TO NOTI ")
+
+        const res2 = await fetch('http://localhost:3000/proc/noticom',{
+            method : 'POST' ,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(y)
+          }
+           
+          );
         //window.location.reload(false); //auto refresh , but not updatng the data
          
     }

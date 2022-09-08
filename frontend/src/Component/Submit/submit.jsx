@@ -19,6 +19,7 @@ const Submit =()=>
     const[incorrect , setinc] = useState('') ; 
     const [sol,setSol] = useState({});
     const [show_solve , setshow ] = useState('') ;
+    const [enab , setenb ] = useState('') ;
     const [ans,setans] = useState(0);
     const [im , setimage] = useState({}) 
     const parse = require('html-react-parser')
@@ -27,6 +28,7 @@ const Submit =()=>
     {
         const getques= async()=>
         {
+            setenb(false) ; 
             
             console.log(ID.id)
             const res = await fetch ('http://localhost:3000/practiceques/problem/'+ID.id);
@@ -57,6 +59,7 @@ const handlechange = async(event) =>
 }
 const submission_done = (event)=>
 {
+    setenb(true)
 
     event.preventDefault() ; 
 
@@ -104,11 +107,12 @@ const submission_done = (event)=>
 
 
 
-
-    if(ans == prob.SOLUTION)
+    
+    if(ans.toLowerCase() == prob.SOLUTION.toLowerCase() )
        { 
         verdict = 1;
         x['STATUS']='Accepted'
+        x['USER_ID']=loggedInUser.ID ; 
         alert("Correct Answer") ; 
 
         const fetchData = async (ID) => {
@@ -201,7 +205,7 @@ return(
 
 
             <div style={{display : "inline-flex"}}>
-                <button style={{border:"3px solid black",color: "red" , backgroundColor:"white" , marginLeft:"500px" , marginBottom:"30px"}}onClick={()=>{setshow(true)}}>Show Solution</button>
+                <button style={{border:"3px solid black",color: "red" , backgroundColor:"white" , marginLeft:"500px" , marginBottom:"30px"}}onClick={()=>{if(enab) {setshow(true)}}}>Show Solution</button>
              <Link to={'/submissions/'+probID} className='status-link' >Problem Status</Link>
        </div>
 

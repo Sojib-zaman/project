@@ -12,6 +12,7 @@ const MyFollowers =  () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const[name , setname] = useState('') ; 
     const added_user ={...name}
+    const[showf , setss] = useState('')  ;
     added_user['USER_ID']=loggedInUser.ID ; 
     const[userinfo , setuserinfo] = useState({})
     console.log(added_user)
@@ -65,6 +66,59 @@ const MyFollowers =  () => {
 
 
             getfollowdata();
+
+
+
+
+
+
+
+
+            
+        const FCOUNT = async ()=>
+        {
+            console.log("cal")
+            try 
+            {
+                const b={...userinfo} ; 
+                b['USER_ID'] = loggedInUser.ID ; 
+                
+                console.log("in try in my followers trying to find followers") ; 
+                const res = await fetch('http://localhost:3000/member/fcount', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(b)
+                        
+                })
+            
+            const data3 = await res.json()  
+           
+            console.log(data3.outBinds.RET);
+    
+            // const newnt = {...notif} ; 
+            // newnt['NOTIFY'] = data3.NOTIFY ; 
+            // newnt['TIME'] = data3.TIME ; 
+            // console.log(newnt) ; 
+            
+            setss(data3.outBinds.RET)
+            console.log("woir ifh h" + data3.outBinds.RET)
+    
+    
+    
+            }
+            catch (error) {
+                console.log(error);
+            }
+        
+        }
+        FCOUNT() ;
+    
+
+
+
          } ,[])
         
        
@@ -88,6 +142,7 @@ const MyFollowers =  () => {
                 
                 </div>
             </div>
+        <div>{showf} people are currently following you</div>
 {
 followerlist&&
     followerlist.map(q => (

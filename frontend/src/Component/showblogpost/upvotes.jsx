@@ -1,3 +1,4 @@
+import e from 'cors';
 import React, { useEffect } from 'react';
 import  { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -18,40 +19,72 @@ const Upvote = ({BLOG_ID})=>
     
     const demo = async () => {
         console.log("in demo")
-       
-        const x = {...bloginfo} ; 
-        x['BLOG_ID'] = BLOG_ID ; 
-        setBlogInfo(x) ;  
-       
-        console.log(bloginfo) ; 
-    const res = await fetch('http://localhost:3000/proc/blgupvotes',{
-      method : 'POST' ,
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(x)
-    }
-     
-    );
-
+        
     const y = {...bloginfo2} ; 
-        y['BLOG_ID'] = BLOG_ID ; 
-        y['USER_ID']=loggedInUser.ID ; 
-        setBlogInfo2(y) ;  
+    y['BLOG_ID'] = BLOG_ID ; 
+    y['USER_ID']=loggedInUser.ID ; 
+    setBlogInfo2(y) ; 
 
-    const res2 = await fetch('http://localhost:3000/proc/upnoti',{
+    const res3 = await fetch('http://localhost:3000/proc/checkupv',{
         method : 'POST' ,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(y)
-      }
-       
-      );
+        }
+        
+        );
+        const data = await res3.json();
+            
+        console.log("IS FOLLOWNG")
+        console.log(data.outBinds.RET);  
+        if(data.outBinds.RET==1)
+        {
+
+        }
+        else
+        {
+            const x = {...bloginfo} ; 
+            x['BLOG_ID'] = BLOG_ID ;
+             x['USER_ID']=loggedInUser.ID ; 
+            setBlogInfo(x) ;  
+           
+            console.log(bloginfo) ; 
+        const res = await fetch('http://localhost:3000/proc/blgupvotes',{
+          method : 'POST' ,
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(x)
+        }
+         
+        );
+     
+    
+        const res2 = await fetch('http://localhost:3000/proc/upnoti',{
+            method : 'POST' ,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(x)
+          }
+           
+          );
+          
+        }
+            
+      
+
+
+      window.location.reload(false);
+
+        
    
-    window.location.reload(false);
+   
+   
     
     
   

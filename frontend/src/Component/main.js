@@ -64,20 +64,20 @@ const Main = (props) => {
     <ShareBox>
     
     <div>
-      <img src="/images/user.svg" alt=""/>
+      <img src={loggedInUser.IMAGE} alt=""/>
       <button>
         <span>
-          Ask or Post
+          Select Post Type
           </span></button>
     </div>
 
     <div>
       <button>
+      <a href = '/upload'>
         <img src="/images/photos.svg" alt=""/>
-        <span>Photo</span>
-      </button>
-      
-    
+      </a>
+      <span>Photo</span>
+    </button>
 
     
       <button>
@@ -88,16 +88,17 @@ const Main = (props) => {
     
 
     
-      <button>
-        <img src="/images/questions (1).svg" alt=""/>
+      <button><a href='/questions'>
+        <img src="/images/questions (1).svg" alt=""/></a>
         <span>Question</span>
       </button>
       
     
 
     
-      <button>
+      <button><a href='/blogs'>
         <img src="/images/blog (1).svg" alt=""/>
+        </a>
         <span>Article</span>
       </button>
       
@@ -162,7 +163,8 @@ div{
   padding: 8px 16px 0px 10px;
   img
   {
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 8px;
   }

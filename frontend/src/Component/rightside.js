@@ -30,9 +30,9 @@ const Rightside = (props) => {
           </li>
         </FeedList>
 
-        <Recommendation>
+        <Recommendation> <a style={{textDecoration:"none"}} href='/showallusers'>
           View all recommendations
-          <img src="/images/right-icon.svg" alt="" />
+          <img src="/images/right-icon.svg" alt=""/></a>
         </Recommendation>
       </FollowCard>
       <BannerCard>

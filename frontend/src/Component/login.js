@@ -135,7 +135,15 @@ const Login = (props) => {
         width: 700px;
         height: 670px;
         position: absolute;
+        margin-left:620px;
         bottom: -2px;
+        width: 520px;
+        transition: width 0.7s;
+      }
+      
+      img:hover {
+        width: 630px;
+      }
         
         padding: 120 px 20 px 200 px;
         right: -100px;

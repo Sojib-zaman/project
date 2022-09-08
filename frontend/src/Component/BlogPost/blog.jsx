@@ -95,16 +95,18 @@ const Blog = () => {
             <div className='form'>
                 
                 <form action="" id='form'  className='addPost-form'>
-                    <label htmlFor="BLOG_TITLE"><h3>Title</h3> </label>
+                    <label htmlFor="BLOG_TITLE"><h3>Title</h3> </label><br/><br/>
                     <input type="text" name="BLOG_TITLE" id="BLOG_TITLE" onChange={handleChange}  placeholder='Enter Title' required/>
                     <br/><br/>
+                    <br/><br/>
                     
-                    <label htmlFor="BLOG_CONTENT"><h3>Description</h3> </label>
+                    <label htmlFor="BLOG_CONTENT"><h3>Description</h3> </label><br/><br/>
                     <textarea name="BLOG_CONTENT" id="area" cols="100" rows="5" placeholder='Describe your blog post' onChange={handleChange} required></textarea>
                     <br/><br/>
                     
-                    <label htmlFor="CATEGORY"><h3>Category</h3> </label>
+                    <label htmlFor="CATEGORY"><h3>Category</h3> </label><br/><br/>
                     <input type="text" name="CATEGORY" id="CATEGORY" onChange={handleChange}  placeholder='Enter Your Blog Category' required/>
+                    <br/><br/>
                     <br/><br/>
                     
 

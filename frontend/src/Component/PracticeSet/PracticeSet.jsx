@@ -7,7 +7,7 @@ import Header2 from '../header2';
 import Footer from '../Footer/Footer';
 import './PracticeSet.css'
 import Problem from '../Practice/showProb';
-
+import { Link } from 'react-router-dom';
 const PracticeSet=()=>
 {
     const [loggedInUser,setLoggedInUser] = useContext(UserContext);
@@ -65,10 +65,15 @@ const PracticeSet=()=>
             <h1 style={{height:'100px',margin:'20px'}}>Problems</h1>
             
             
-            
+            <Link to={'/Leaderboard/'} className='glll' >Global Leaderboard</Link>
             
             <div className='problem-container'>
                 
+            
+
+
+
+
                 <div className='problem-show'>
                     {
                          

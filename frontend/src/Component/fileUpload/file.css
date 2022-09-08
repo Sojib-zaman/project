@@ -1,0 +1,115 @@
+#container{
+    padding-bottom: 200px;
+    padding-top: 100px;
+}
+
+#label{
+    padding-bottom: 1000px;
+    padding-top: 100px;
+    margin-left: 316px;
+    color: #193297;
+    font-weight: bolder;
+}
+
+.files input {
+    padding-top: 1000px;
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    padding: 120px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    width: 100% !important;
+}
+.files input:focus{     outline: 2px dashed #92b0b3;  outline-offset: -10px;
+    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+    transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
+}
+.files{ position:relative}
+.files:after {  pointer-events: none;
+    position: absolute;
+    padding-top: 10px;
+    top: 60px;
+    left: 0;
+    width: 50px;
+    right: 0;
+    height: 56px;
+    content: "";
+
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.color input{ background-color:#f1f1f1;}
+.files:before {
+    position: absolute;
+    padding-top: 10px;
+    bottom: 10px;
+    left: 0;  pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 57px;
+ 
+    display: block;
+    margin: 0 auto;
+    color: #2ea591;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+
+
+#photo-submit{
+    color: #127a1d;
+    padding-left: 667px;
+    border: 2px rgb(20, 4, 2);
+}
+
+#control{
+    padding-left: 105px;
+}
+.showing-image
+{
+    display: grid;
+    margin-top: 100px;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+.indimg
+{
+    border: 2px solid black;
+    margin-bottom: 50px;
+    border-radius: 5px;
+}
+
+#CAParea{
+    margin-bottom: 140px;
+    margin-left: 400px;
+}
+
+#capImg{
+font-size: medium;
+text-align: center;
+color: #2ea591;
+}
+
+#capName{
+font-size: large;
+text-align: center;
+color: #193297;
+margin-bottom: 2px;
+}
+
+#imgcontain{
+    border: 2px saddlebrown;
+    
+}
+
+.class-name:after {
+    content: " ";
+    display: block;
+    border-bottom: 0.5px solid #9E9E9E;
+}

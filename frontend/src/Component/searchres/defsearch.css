@@ -1,0 +1,37 @@
+#defsearch
+{
+    margin-top: 80px;
+}
+#container2{
+    padding-top: 100px;
+}
+
+#box{
+    margin-left: 170px;
+    border: 2px solid rgb(50, 61, 124);
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+#box2{
+    margin-left: 462px;
+  margin-top: 20px;
+  width: 80px;
+  border: 2px solid rgb(50, 61, 124);
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+#header_cat{
+    margin-left: 351px;
+    padding-bottom: 40px;
+    font-weight: bolder;
+    font-size: 36px;
+}
+
+#box3{
+    margin-left: 354px;
+background-color: green;
+border-radius: 4px;
+font-weight: bolder;
+}

@@ -61,15 +61,15 @@ label{
 .creater
 {
    
-        background: linear-gradient( #f3904f, #3b4371 );
-        margin-bottom: 30px;
-        margin-left: 11pc;
+    background: linear-gradient( #4ff397, #9098c7 );;
+    margin-bottom: 30px;
+    margin-left: 11pc;
 }
 #CATEGORY
 {
     display: block;
 background-color: wheat;
 color: black;
-font-size: large;
+font-size: small;
 font-weight: bold;
 }

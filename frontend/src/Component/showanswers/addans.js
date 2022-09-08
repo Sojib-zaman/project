@@ -11,6 +11,7 @@ const AddAns = ({Ques_id}) => {
 
     const [loggedInUser,setLoggedInUser] = useContext(UserContext);
     const [addans , setaddans] = useState([]) ; 
+    const [addanss , setaddanss] = useState([]) ; 
     let navigate = useNavigate() ; 
     let location = useLocation() ; 
 
@@ -50,7 +51,7 @@ const AddAns = ({Ques_id}) => {
     }
 
     
-    const handleSubmit= (event)=>
+    const handleSubmit= async (event)=>
     {
         event.preventDefault();
         console.log(addans) ; 
@@ -78,6 +79,24 @@ const AddAns = ({Ques_id}) => {
         } catch (error) {
             console.log(error);
         }
+        
+        const y={...addanss} ; 
+        y['USER_ID'] = loggedInUser.ID ; 
+        y['QUESTION_ID'] = Ques_id ; 
+        setaddanss(y) ;
+
+        console.log("SENDING DATA TO NOTI ")
+
+        const res2 = await fetch('http://localhost:3000/proc/upans',{
+            method : 'POST' ,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(y)
+          }
+           
+          );
          
         
     }
@@ -99,7 +118,7 @@ const AddAns = ({Ques_id}) => {
                             
                             
                            
-                            <textarea name="ANS_CONTENT" id="area" cols="100" rows="5" placeholder='Add answer' onChange={handleChange} required></textarea>
+                            <textarea name="ANS_CONTENT" id="area" cols="150" rows="2" placeholder='Add answer' onChange={handleChange} required></textarea>
                             <br></br><br></br>
                             <input type="submit" value="Submit" className='createpostBtn' onClick={handleSubmit} />
                             </form>

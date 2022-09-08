@@ -17,7 +17,7 @@ const Leftside = (props) => {
             <Link>Welcome, there!</Link>
           </a>
           <a>
-            <AddPhotoText>Add a photo</AddPhotoText>
+            <AddPhotoText><a style={{textDecoration:"none"}} href='/upload'>Add a photo</a></AddPhotoText>
           </a>
         </UserInfo>
         <Widget>
@@ -44,16 +44,16 @@ const Leftside = (props) => {
       <a style={{textDecoration:"none"}} href='/showfollowers'>
           <span>My Followers</span>
         </a>
-        <a>
+        <a style={{textDecoration:"none"}} href='/practice'>
           <span>
             Contests
             <img src="/images/plus-icon.svg" alt="" />
           </span>
         </a>
-        <a>
+        <a style={{textDecoration:"none"}} href='/showallusers'>
           <span>Follow People</span>
         </a>
-        <a style={{textDecoration:"none"}} href='/showallusers' >
+        <a style={{textDecoration:"none"}} href='/showquestions' >
           <span>Discover more</span>
         </a>
       </CommunityCard>

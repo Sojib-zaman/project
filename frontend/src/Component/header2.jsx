@@ -20,6 +20,10 @@ const Header2 = (props) => {
     else admin= true ;
 
     console.log(admin)
+   
+        
+
+
   return (
     <Container>
       <Content>
@@ -45,11 +49,18 @@ const Header2 = (props) => {
         </Logo>
         <Search>
           <div>
-            <input type="text" placeholder="Search" />
+          <form id="myForm">
+            
+            <Link  to='/defsearchvalues' style={{ backgroundColor:"cyan"}} id='homesearch'>Search</Link>
+            
+          </form>
           </div>
+          
           <SearchIcon>
+          
             <img src="/images/search-icon.svg" alt="" />
           </SearchIcon>
+          
         </Search>
         <Nav>
           <NavListWrap>
@@ -74,12 +85,19 @@ const Header2 = (props) => {
               </a>
             </NavList>
 
+            <NavList>
+              <a href="/upload">
+                <img src="/images/messaging.svg" height= "25px"  alt="" />
+                <span>Images</span>
+              </a>
+            </NavList>
+
             
 
             <NavList>
               <a href = "\practice">
                 <img src="/images/quiz.svg" height="25px" alt="" />
-                <span>Practice Problem</span>
+                <span>Problemset</span>
               </a>
             </NavList>
 
@@ -147,9 +165,10 @@ const Search = styled.div`
   position: relative;
   & > div {
     max-width: 280px;
-    input {
+    #homesearch {
       border: none;
       box-shadow: none;
+      text-decoration: none;
       background-color: #eef3f8;
       border-radius: 2px;
       color: rgba(0, 0, 0, 0.9);
@@ -157,8 +176,9 @@ const Search = styled.div`
       padding: 0 8px 0 40px;
       line-height: 1.75;
       font-weight: 400;
-      font-size: 14px;
-      height: 34px;
+      font-size: 18px;
+      height: 30px;
+      width: 180px;
       border-color: #dce6f1;
       vertical-align: text-top;
     }

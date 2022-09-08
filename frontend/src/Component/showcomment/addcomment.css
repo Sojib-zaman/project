@@ -17,8 +17,10 @@
 {
     margin-top: -11px;
     background-color: #8a42f5;
+    margin-bottom: 20px;
+    margin-left: 90px;
     display: inline;
     border-radius: 4px;
-    font-size: 40px;
+    font-size: 20px;
     border: 3px solid black;
 }

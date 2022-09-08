@@ -40,3 +40,17 @@
     margin-top: 3px;
     line-height: 1.6;
 }
+#pcon
+{
+    object-fit: contain;
+    padding-bottom: 50px;
+}
+#xx
+{
+    object-fit: contain;
+
+}
+.bl-con-font
+{
+    font-family: 'Times New Roman', Times, serif;
+}

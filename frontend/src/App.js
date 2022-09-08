@@ -22,7 +22,7 @@ import AskQues from './Component/askques/askques';
 //import Signup from './Component/register2/signup';
 import Showpersonalblog from './Component/showblogpost/personal';
 import {createContext, useState} from 'react';
-
+import FileUploader from './Component/fileUpload/fileupload';
 import Blog from './Component/BlogPost/blog';
 import Showb from './Component/showblogpost/showb2';
 import Showq from './Component/showallques/showq';
@@ -37,6 +37,9 @@ import Notification from './Component/Notifications/notification';
 import MyFollowers from './Component/followers/myfollowers';
 import FollowNew from './Component/followers/followperson';
 import Submissions from './Component/Submission/submission';
+import Leaderboard from './Component/Submission/Leaderboard';
+import DefaultSearch from './Component/searchres/defsearch';
+import Showupload from './Component/fileUpload/showuploadedimg';
 export const UserContext=createContext();
 
 function App() {
@@ -74,7 +77,7 @@ function App() {
           <Route path='/personalquestions' element={<ShowPersonalQues DEF = {0}></ShowPersonalQues>}></Route>
           <Route path='/AdminControl' element={<ShowAdminOptions/>}/>
           <Route path='/submissions/:id' element={<Submissions/>}/>
-
+          <Route path='/Leaderboard' element={<Leaderboard/>}/>
           <Route path='/practice' element ={<PracticeSet></PracticeSet>}></Route>
           <Route path='/practice/problem/:id' element={<Submit></Submit>}/>
           <Route path='/savedposts' element={<ShowSaved></ShowSaved>}/>
@@ -83,6 +86,9 @@ function App() {
           <Route path='/updateinfo' element={<Update></Update>}/>
           <Route path='/showfollowers' element={<MyFollowers></MyFollowers>}/>
           <Route path='/showallusers' element={<FollowNew></FollowNew>}/>
+          <Route path='/defsearchvalues' element={<DefaultSearch/>}/>
+          <Route path='/upload' element={<FileUploader/>}/>
+          <Route path='/showupload' element={<Showupload/>}/>
           <Route path="*" element={<p style={{color:"coral"}}>Are you sure you are visiting the correct URL ? !</p>} />   
         
         </Routes>

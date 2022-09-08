@@ -20,6 +20,8 @@ const[notify , setnoti] = useState('') ;
 const[visitee , setvisitee ] = useState('')
 const[otherq , setoq] = useState('');
 const[otherb , setob] = useState('')
+const[finfo , setfinfo] = useState('');
+const[showf , setss] = useState('')  ;
 useEffect(()=>
 {
     
@@ -38,6 +40,42 @@ useEffect(()=>
     }
 
     try{getuser();}
+    catch(error){console.log(error)} 
+
+
+
+
+    const getfollowinginformation= async()=>
+    {
+        
+
+          
+        
+       const x = {...finfo} ; 
+        x['FOLLOWEE_ID'] = ID.id ; 
+        x['FOLLOWER_ID'] = loggedInUser.ID ; 
+
+
+            const res = await fetch('http://localhost:3000/proc/isfollowing',{
+              method : 'POST' , 
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },body: JSON.stringify(x)
+            });
+            const data = await res.json();
+            
+            console.log("IS FOLLOWNG")
+            console.log(data.outBinds.RET);    
+            setss(data.outBinds.RET)
+  
+          //window.location.reload(false);
+        
+       
+  
+  
+  }
+  try{getfollowinginformation();}
     catch(error){console.log(error)} 
 
 },[])
@@ -95,6 +133,49 @@ const followuser=(event)=>
 
 
 }
+const Unfollowuser=(event)=>
+{
+    event.preventDefault() ; 
+
+    const x = {...notify} ; 
+    x['FOLLOWEE_ID'] = visitee.ID ; 
+    x['FOLLOWER_ID'] = loggedInUser.ID ; 
+    setnoti(x) ;  
+
+
+
+    const fetchData = async () => {
+          
+        
+      
+          const res = await fetch('http://localhost:3000/proc/unfollow',{
+            method : 'POST' , 
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },body: JSON.stringify(x)
+          });
+          const data = await res.json();
+          
+          
+          //console.log(data);    
+        }
+      
+      
+         console.log(x)
+        
+        
+         fetchData()
+        .catch(console.error);
+
+
+        //window.location.reload(false);
+        const btn = document.getElementById('unfollow');
+        btn.style.display = 'none';
+     
+
+
+}
 
  let navigate  = useNavigate();
  let location = useLocation();
@@ -139,10 +220,14 @@ const followuser=(event)=>
                         </div>
                     
 
+                        {   !showf &&
+                             <input type="submit" value="Follow" width="50px" className='createpostBtn' id ='follow' onClick={followuser} />           
+                        }
+                       { showf &&
+                        <input type="submit" value="Unfollow" width="50px" className='createpostBtn' id ='unfollow' onClick={Unfollowuser} />           
 
-                        <input type="submit" value="Follow" width="50px" className='createpostBtn' id ='follow' onClick={followuser} />           
-   
-
+                       }
+                        
                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600"></h6>
                         <div class="row">
                             <div class="col-sm-6">

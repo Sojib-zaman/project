@@ -3,6 +3,19 @@
     
     min-height: 650px;
 }
+.glll
+{
+    text-decoration: none;
+    background: #35ffa04a;
+    color: black;
+    font-size: 30px;
+    font-family: 'TIMES NEW ROMAN';
+    border: 4px solid purple;
+    border-radius: 12px;
+    padding: 3px;
+    margin-left: 42%;
+  
+}
 .filterBtn{
     margin: 5px;
     width: 50%;
