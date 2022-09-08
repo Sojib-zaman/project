@@ -7,7 +7,7 @@ const askques = require('./addques');
 const showpost = require('./showpost') ; 
 const practice = require('./practiceques')
 const procedures = require('./proc');
-
+const fileupload = require('./fileupload');
 
 //const answer = require('./answer') 
 router.use('/member' , member) ; 
@@ -17,6 +17,6 @@ router.use('/showpost', showpost) ;
 router.use('/practiceques' , practice) ; 
 router.use('/proc' , procedures) ;
 
-
+router.use('/fileupload' , fileupload) ;
 //router.use('/answer' , answer) ; 
 module.exports = router 

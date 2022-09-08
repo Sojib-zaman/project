@@ -1,3 +1,4 @@
+const OracleDB = require('oracledb');
 const { DATE } = require('oracledb');
 const con = require('../Connection') ; 
 
@@ -13,6 +14,43 @@ handle.showblogpost = async(req , res , next) =>
     const query = `
     SELECT U.NAME , P.ID , U.ID , P.BLOG_TITLE , P.BLOG_CONTENT , to_char(P.TIME ,'YYYY-MM-DD HH24:MI:SS') AS TIME , P.CATEGORY , P.UPVOTES FROM BLOG P JOIN APP_USER U ON P.USER_ID = U.ID  ORDER BY TIME DESC`
     const binds={}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+
+handle.fileNameupload = async(FILE_NAME , USER_ID , CAPTION ) => 
+{
+    
+    //console.log("in register log showpost") 
+    const query = `
+    BEGIN
+        ADD_RESOURCE(:FILE_NAME , :USER_ID , :CAPTION);
+    END;
+    `
+    const binds={FILE_NAME , USER_ID , CAPTION} 
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+handle.getallimage = async() => 
+{
+
+console.log("in fasfafawd post") 
+    const query = `
+    SELECT I.CAPTION , U.NAME , I.FILE_NAME FROM RESOURCES I JOIN APP_USER U ON I.USER_ID = U.ID `
+    const binds={}
+    const result = (await con.execute(query , binds , con.options))
+    console.log(result)
+    return result ; 
+}
+
+
+handle.idspecblog = async(BLOG_ID) => 
+{
+    
+    //console.log("in register log showpost") 
+    const query = `
+    SELECT BLOG_TITLE , AUTHOR , TIME , CATEOGORY FROM BLOGS WHERE ID = :BLOG_ID`
+    const binds={BLOG_ID}
     const result = (await con.execute(query , binds , con.options))
     return result ; 
 }
@@ -115,12 +153,12 @@ handle.savedb= async(userID ) =>
     return result.rows ; 
 }
 
-handle.upvoteblog = async(BLOG_ID) => 
+handle.upvoteblog = async(BLOG_ID , USER_ID) => 
 {
     
     console.log("in register log upvote ") 
-    console.log(BLOG_ID)
-    const query = `
+    console.log(BLOG_ID , USER_ID)
+    let query = `
     BEGIN
      INC_UPVOTES(:BLOG_ID) ; 
     END;
@@ -129,8 +167,37 @@ handle.upvoteblog = async(BLOG_ID) =>
     
     const binds={BLOG_ID}
     const result = (await con.execute(query , binds , con.options))
+
+    query = `
+    BEGIN
+     ADD_UPVOTE(:USER_ID , :BLOG_ID) ; 
+    END;
+    
+    `
+    
+    const binds2={USER_ID , BLOG_ID}
+    const result2 = (await con.execute(query , binds2 , con.options))
+
     return result ; 
 }
+handle.checkupvote = async(BLOG_ID , USER_ID) => 
+{
+    
+    console.log("in register log upvote ") 
+    console.log(BLOG_ID , USER_ID)
+    const query = `
+    BEGIN
+    :RET := CHECK_UPVOTES(:BLOG_ID , :USER_ID) ; 
+    END;
+    
+    `
+    
+    const binds={BLOG_ID , USER_ID , RET:{dir:OracleDB.BIND_OUT , type: OracleDB.NUMBER},};
+    const result = (await con.execute(query , binds , con.options));
+    console.log(result)
+    return result ; 
+}
+
 
 
 
@@ -207,6 +274,49 @@ handle.SendFollowNotification = async(FOLLOWEE_ID , FOLLOWER_ID) =>
     return result ; 
 }
 
+handle.UnfollowUser = async(FOLLOWEE_ID , FOLLOWER_ID) => 
+{
+    
+    //console.log("in register log AC count ") 
+    //console.log(ID)
+    const query = `
+    BEGIN
+     UNFOLLOW(:FOLLOWER_ID , :FOLLOWEE_ID) ; 
+    END;
+    
+    `
+    
+    const binds={FOLLOWER_ID , FOLLOWEE_ID}
+    const result = (await con.execute(query , binds , con.options))
+
+   
+
+
+    return result ; 
+}
+
+handle.checkfollowing = async(FOLLOWEE_ID , FOLLOWER_ID) => 
+{
+    
+    //console.log("in register log AC count ") 
+    //console.log(ID)
+    console.log(FOLLOWER_ID , FOLLOWEE_ID )
+    console.log("checking") ; 
+    const query = `
+    BEGIN
+     :RET :=  IS_FOLLOWER(:FOLLOWER_ID , :FOLLOWEE_ID) ; 
+    END;
+    
+    `
+    
+    const binds={FOLLOWER_ID , FOLLOWEE_ID , RET:{dir:OracleDB.BIND_OUT , type: OracleDB.NUMBER},};
+    const result = (await con.execute(query , binds , con.options))
+
+   
+
+
+    return result ; 
+}
 handle.SendUpvoteNotification = async(BLOG_ID, USER_ID) => 
 {
    
@@ -224,6 +334,37 @@ handle.SendUpvoteNotification = async(BLOG_ID, USER_ID) =>
 }
 
 
+handle.SendCommentNotification = async(QUESTION_ID, USER_ID) => 
+{
+   
+   
+    const query = `
+    BEGIN
+     COMMENT_NOTI(:QUESTION_ID, :USER_ID);
+    END;
+    
+    `
+    
+    const binds={QUESTION_ID, USER_ID}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
+
+handle.SendCOMMENTNotification = async(BLOG_ID, USER_ID) => 
+{
+   
+   
+    const query = `
+    BEGIN
+     NOTI_COMMENT(:BLOG_ID, :USER_ID);
+    END;
+    
+    `
+    
+    const binds={BLOG_ID, USER_ID}
+    const result = (await con.execute(query , binds , con.options))
+    return result ; 
+}
 
 
 handle.saveblog = async(USER_ID , BLOG_ID) => 
@@ -277,7 +418,7 @@ handle.getspecificprobinfo= async(ID ) =>
 
     //correct query later 
     const query = `
-   select S.PROBLEM_ID , S.STATUS ,P.TITLE, S.TIME , U.NAME from submission S JOIN APP_USER U on S.USER_ID = U.ID JOIN PRACTICE P ON S.PROBLEM_ID = P.ID where S.PROBLEM_ID = :ID`
+   select S.PROBLEM_ID , S.STATUS ,P.TITLE, S.TIME , U.NAME from submission S JOIN APP_USER U on S.USER_ID = U.ID JOIN PRACTICE P ON S.PROBLEM_ID = P.ID where S.PROBLEM_ID = :ID ORDER BY S.TIME DESC`
     const binds={ID}
     const result = (await con.execute(query , binds , con.options))
     //console.log('78 result in main query register')

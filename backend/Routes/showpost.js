@@ -139,6 +139,26 @@ router.post('/personalquestions', async(req,res)=>{
 })
 
 
+router.post('/idspecpost', async(req,res)=>{
+  try{
+    //console.log("line 85 in routes show personal ques ")
+    //console.log(req.body) ; 
+    const  { BLOG_ID } = req.body ; 
+    const result = await query.idspecblog(BLOG_ID) ; 
+    //console.log("RESULT in routes line 89 for pblog") 
+    //console.log(result)
+    
+    res.json(result);
+    
+   
+  
+  }
+  catch(err){
+    console.log(err)
+  }  
+})
+
+
 router.post('/getsaved', async(req,res)=>{
   try{
     //console.log("line 85 in routes show personal ques ")

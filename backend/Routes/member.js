@@ -118,6 +118,85 @@ router.get('/user/:ID' , async(req , res )=>
     }
 })
 
+router.post('/getspecbl', async(req,res)=>{
+    try{
+      //console.log("line 65 in routes show answers ")
+      //console.log(req.body) ; 
+      const  { CATEGORY } = req.body ; 
+      console.log(CATEGORY)
+      console.log("in memeber 128") 
+      let result ; 
+      if(CATEGORY=='CATEGORY')
+      {
+        result = await query.showbycat(CATEGORY) ; 
+      }
+     else if (CATEGORY=='TIME')
+    {
+        result = await query.showbytime(CATEGORY) ; 
+    }
+    else if(CATEGORY=='AUTHOR')
+    {
+        result = await query.showbyauth(CATEGORY) ; 
+
+    }   
+    else if(CATEGORY=='UPVOTES')
+    {   result = await query.showbyupv(CATEGORY) ; 
+
+    }
+    
+    //console.log("RESULT in routes line 69 for ans") 
+      //console.log(result)
+      
+      res.json(result);
+      
+     
+    
+    }
+    catch(err){
+      console.log(err)
+    }  
+  })
+
+
+  router.post('/getspecql', async(req,res)=>{
+    try{
+      //console.log("line 65 in routes show answers ")
+      //console.log(req.body) ; 
+      const  { CATEGORY } = req.body ; 
+      console.log(CATEGORY)
+      console.log("in memeber 128") 
+      let result ; 
+      if(CATEGORY=='CATEGORY')
+      {
+        result = await query.showqycat(CATEGORY) ; 
+      }
+     else if (CATEGORY=='TIME')
+    {
+        result = await query.showqytime(CATEGORY) ; 
+    }
+    else if(CATEGORY=='AUTHOR')
+    {
+        result = await query.showqyauth(CATEGORY) ; 
+
+    }   
+    else if(CATEGORY=='UPVOTES')
+    {   result = await query.showqyupv(CATEGORY) ; 
+
+    }
+    
+    //console.log("RESULT in routes line 69 for ans") 
+      //console.log(result)
+      
+      res.json(result);
+      
+     
+    
+    }
+    catch(err){
+      console.log(err)
+    }  
+  })
+  
 
 router.post('/isdeleted' , async(req , res)=>
 {
@@ -177,6 +256,26 @@ router.post('/getfollowers' , async(req , res) =>
     }
 }
 )
+router.post('/defsearch' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member DEFAULT SEARCH") ; 
+       
+        const {SEARCH_VALUE , CATEGORY} = req.body ; 
+         console.log(SEARCH_VALUE , CATEGORY)
+        const result = await query.default_search( SEARCH_VALUE, CATEGORY) 
+        console.log("in member") ; 
+        console.log(result ) ; 
+        res.json(result);
+        
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
 
 router.post('/getallusers' , async(req , res) =>
 {
@@ -189,6 +288,25 @@ router.post('/getallusers' , async(req , res) =>
         const result = await query.getall( USER_ID) 
        
         res.json(result) ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+router.post('/fcount' , async(req , res) =>
+{
+    try
+    {
+        console.log("in member getting non followers") ; 
+       
+        const {USER_ID} = req.body ; 
+         console.log(USER_ID)
+        const result = await query.fcount( USER_ID) 
+       
+        res.send(result) ; 
+        
     }
     catch(err)
     {

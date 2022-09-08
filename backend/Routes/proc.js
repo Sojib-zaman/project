@@ -7,9 +7,9 @@ router.post('/blgupvotes' , async(req , res) =>
     {
         console.log("in blog upvotes") ; 
            
-         const {BLOG_ID} = req.body ; 
+         const {BLOG_ID , USER_ID} = req.body ; 
          console.log(req.body)
-        const result = await query.upvoteblog(BLOG_ID ) 
+        const result = await query.upvoteblog(BLOG_ID , USER_ID ) 
         console.log(result);
        
         res.end() ; 
@@ -20,7 +20,25 @@ router.post('/blgupvotes' , async(req , res) =>
     }
 }
 )
-
+router.post('/checkupv' , async(req , res) =>
+{
+    try
+    {
+        console.log("in blog upvotes") ; 
+           
+         const {BLOG_ID , USER_ID} = req.body ; 
+         console.log(req.body)
+        const result = await query.checkupvote(BLOG_ID , USER_ID ) 
+        console.log(result);
+       
+        res.send(result) ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
 router.post('/upnoti' , async(req , res) =>
 {
     try
@@ -41,7 +59,45 @@ router.post('/upnoti' , async(req , res) =>
 }
 )
 
+router.post('/upans' , async(req , res) =>
+{
+    try
+    {
+        console.log("in blog upvotes notification") ; 
+           
+         const {QUESTION_ID , USER_ID} = req.body ; 
+         console.log(req.body)
+        const result = await query.SendCommentNotification(QUESTION_ID, USER_ID ) 
+        console.log(result);
+       
+        res.end() ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
 
+router.post('/noticom' , async(req , res) =>
+{
+    try
+    {
+        console.log("in blog upvotes notification") ; 
+           
+         const {BLOG_ID , USER_ID} = req.body ; 
+         console.log(req.body)
+        const result = await query.SendCOMMENTNotification(BLOG_ID, USER_ID ) 
+        console.log(result);
+       
+        res.end() ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
 
 
 
@@ -101,6 +157,49 @@ router.post('/notifyfollow' , async(req , res) =>
         console.log(result);
        
         res.end() ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+
+router.post('/unfollow' , async(req , res) =>
+{
+    try
+    {
+        //console.log("in practice AC count") ; 
+           //console.log(req.body)
+        const {FOLLOWEE_ID , FOLLOWER_ID} = req.body ; 
+        
+        //console.log(ID)
+        const result = await query.UnfollowUser(FOLLOWEE_ID , FOLLOWER_ID) 
+        console.log(result);
+       
+        res.end() ; 
+    }
+    catch(err)
+    {
+        console.log(err)  ;
+    }
+}
+)
+router.post('/isfollowing' , async(req , res) =>
+{
+    try
+    {
+        //console.log("in practice AC count") ; 
+           //console.log(req.body)
+        const {FOLLOWEE_ID , FOLLOWER_ID} = req.body ; 
+        console.log("in proc")
+        console.log(FOLLOWER_ID , FOLLOWEE_ID )
+        //console.log(ID)
+        const result = await query.checkfollowing(FOLLOWEE_ID , FOLLOWER_ID) ;
+        console.log("in PROC")
+        console.log(result);
+       
+        res.send(result) ; 
     }
     catch(err)
     {

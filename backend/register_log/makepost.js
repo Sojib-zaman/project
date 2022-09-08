@@ -19,10 +19,25 @@ handle.addnewblogpost = async(USER_ID , UPVOTES , TIME , BLOG_TITLE  , BLOG_CONT
     console.log(typeof(BLOG_CONTENT)) ; console.log(typeof(BLOG_TITLE)) ; 
 
 
-
-    const query = `INSERT INTO C##PROJECT.BLOG (USER_ID , UPVOTES, TIME , BLOG_TITLE  , BLOG_CONTENT, CATEGORY )
-    VALUES (:USER_ID ,:UPVOTES, :TIME , :BLOG_TITLE  , :BLOG_CONTENT , :CATEGORY)
+    const query = `
+    
+    DECLARE
+    V_variable VARCHAR2(300) default null;
+    BEGIN 
+    V_variable := IS_BLOG_VALID(:BLOG_CONTENT) ;
+    
+    IF V_variable LIKE 'OK' THEN 
+    INSERT INTO C##PROJECT.BLOG (USER_ID , UPVOTES, TIME , BLOG_TITLE  , BLOG_CONTENT, CATEGORY )
+    VALUES (:USER_ID ,:UPVOTES, :TIME , :BLOG_TITLE  , :BLOG_CONTENT , :CATEGORY);
+    END IF ;
+   
+    END;
     `
+
+
+//   const query = `INSERT INTO C##PROJECT.BLOG (USER_ID , UPVOTES, TIME , BLOG_TITLE  , BLOG_CONTENT, CATEGORY )
+//     VALUES (:USER_ID ,:UPVOTES, :TIME , :BLOG_TITLE  , :BLOG_CONTENT , :CATEGORY)
+//     `
     
 
     const binds = {USER_ID , UPVOTES, TIME , BLOG_TITLE  , BLOG_CONTENT, CATEGORY}
@@ -83,8 +98,22 @@ handle.addans=async(USER_ID , TIME ,QUESTION_ID, ANS_CONTENT,SUPPORT) =>
     TIME = new Date(TIME) ; 
    
 
-    const query = `INSERT INTO C##PROJECT.ANSWERS (USER_ID , QUESTION_ID, TIME ,  ANS_CONTENT, SUPPORT )
-    VALUES (:USER_ID ,:QUESTION_ID, :TIME ,  :ANS_CONTENT, :SUPPORT )
+    // const query = `INSERT INTO C##PROJECT.ANSWERS (USER_ID , QUESTION_ID, TIME ,  ANS_CONTENT, SUPPORT )
+    // VALUES (:USER_ID ,:QUESTION_ID, :TIME ,  :ANS_CONTENT, :SUPPORT )
+    // `
+    const query = `
+    
+    DECLARE
+    V_variable VARCHAR2(300) default null;
+    BEGIN 
+    V_variable := IS_ANS_VALID(:ANS_CONTENT) ;
+    
+    IF V_variable LIKE 'OK' THEN 
+    INSERT INTO C##PROJECT.ANSWERS (USER_ID , QUESTION_ID, TIME ,  ANS_CONTENT, SUPPORT )
+     VALUES (:USER_ID ,:QUESTION_ID, :TIME ,  :ANS_CONTENT, :SUPPORT );
+    END IF ;
+   
+    END;
     `
     
 
@@ -105,10 +134,24 @@ handle.addcomment=async(USER_ID , TIME ,BLOG_ID, COMMENTS) =>
     TIME = new Date(TIME) ; 
    
 
-    const query = `INSERT INTO C##PROJECT.COMMENTS (USER_ID , BLOG_ID ,COMMENTS, TIME  )
-    VALUES (:USER_ID ,:BLOG_ID , :COMMENTS , :TIME )
-    `
+    // const query = `INSERT INTO C##PROJECT.COMMENTS (USER_ID , BLOG_ID ,COMMENTS, TIME  )
+    // VALUES (:USER_ID ,:BLOG_ID , :COMMENTS , :TIME )
+    // `
     
+    const query = `
+    
+    DECLARE
+    V_variable VARCHAR2(300) default null;
+    BEGIN 
+    V_variable := IS_CMNT_VALID(:COMMENTS) ;
+    
+    IF V_variable LIKE 'OK' THEN 
+    INSERT INTO C##PROJECT.COMMENTS (USER_ID , BLOG_ID ,COMMENTS, TIME  )
+     VALUES (:USER_ID ,:BLOG_ID , :COMMENTS , :TIME );
+    END IF ;
+   
+    END;
+    `
 
     const binds = {USER_ID , TIME ,BLOG_ID, COMMENTS}
 
